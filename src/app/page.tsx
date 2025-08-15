@@ -1,103 +1,199 @@
-import Image from "next/image";
+import Link from 'next/link';
 
 export default function Home() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900 text-white">
+      <div className="max-w-6xl mx-auto px-4 py-16">
+        
+        {/* OKOA ASCII Header */}
+        <div className="text-center mb-12">
+          <div className="font-mono text-sm mb-6 text-blue-400">
+            <pre>
+{`╔══════════════════════════════════════════════════════════════════════════════════╗
+║   ██████╗ ██╗  ██╗ ██████╗  █████╗      ██╗      █████╗ ██████╗ ███████╗    ║
+║  ██╔═══██╗██║ ██╔╝██╔═══██╗██╔══██╗     ██║     ██╔══██╗██╔══██╗██╔════╝    ║
+║  ██║   ██║█████╔╝ ██║   ██║███████║     ██║     ███████║██████╔╝███████╗    ║
+║  ██║   ██║██╔═██╗ ██║   ██║██╔══██║     ██║     ██╔══██║██╔══██╗╚════██║    ║
+║  ╚██████╔╝██║  ██╗╚██████╔╝██║  ██║     ███████╗██║  ██║██████╔╝███████║    ║
+║   ╚═════╝ ╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═╝     ╚══════╝╚═╝  ╚═╝╚═════╝ ╚══════╝    ║
+╚══════════════════════════════════════════════════════════════════════════════════╝`}
+            </pre>
+          </div>
+          
+          <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+            Automated Document Processing System
+          </h1>
+          <p className="text-xl text-gray-300 mb-8">
+            Institutional-grade multi-agent document analysis with real-time monitoring
+          </p>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+
+        {/* Key Features Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+          
+          {/* Multi-Agent Processing */}
+          <div className="bg-gray-800/50 backdrop-blur rounded-xl p-6 border border-gray-700">
+            <div className="text-3xl mb-4">🤖</div>
+            <h3 className="text-xl font-semibold mb-3 text-blue-400">Multi-Agent Processing</h3>
+            <p className="text-gray-300 text-sm mb-4">
+              Intelligent agent pool that scales automatically based on workload. 
+              Multiple AI agents process documents simultaneously for maximum efficiency.
+            </p>
+            <ul className="text-xs text-gray-400 space-y-1">
+              <li>• Auto-scaling agent pool (1-5 agents)</li>
+              <li>• Real-time load balancing</li>
+              <li>• Cost-optimized scaling decisions</li>
+            </ul>
+          </div>
+
+          {/* Real-time Monitoring */}
+          <div className="bg-gray-800/50 backdrop-blur rounded-xl p-6 border border-gray-700">
+            <div className="text-3xl mb-4">📊</div>
+            <h3 className="text-xl font-semibold mb-3 text-green-400">Real-time Monitoring</h3>
+            <p className="text-gray-300 text-sm mb-4">
+              Watch documents being processed in real-time with live cost tracking, 
+              token usage, and processing queue visualization.
+            </p>
+            <ul className="text-xs text-gray-400 space-y-1">
+              <li>• Live processing dashboard</li>
+              <li>• Token & cost tracking</li>
+              <li>• Slack notifications</li>
+            </ul>
+          </div>
+
+          {/* OKOA Integration */}
+          <div className="bg-gray-800/50 backdrop-blur rounded-xl p-6 border border-gray-700">
+            <div className="text-3xl mb-4">⚡</div>
+            <h3 className="text-xl font-semibold mb-3 text-purple-400">OKOA Integration</h3>
+            <p className="text-gray-300 text-sm mb-4">
+              Full integration with OKOA Due Diligence Framework, Synthesis Prime Agent, 
+              and Midnight Atlas real estate analysis.
+            </p>
+            <ul className="text-xs text-gray-400 space-y-1">
+              <li>• 252 DD items across 30 categories</li>
+              <li>• Institutional-grade analysis</li>
+              <li>• OKOA LABS visual branding</li>
+            </ul>
+          </div>
+        </div>
+
+        {/* Processing Flow Visualization */}
+        <div className="bg-gray-800/30 backdrop-blur rounded-xl p-8 mb-12 border border-gray-700">
+          <h2 className="text-2xl font-semibold mb-6 text-center text-blue-400">Automated Processing Flow</h2>
+          
+          <div className="font-mono text-sm text-center text-gray-300">
+            <pre>
+{`┌─────────────────────────────────────────────────────────────────────────────────────┐
+│                         OKOA AUTOMATED PROCESSING PIPELINE                         │
+├─────────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                     │
+│  [Box.com] → [Webhook] → [Queue] → [Agent Pool] → [Claude] → [Output] → [Slack]    │
+│      ↓           ↓         ↓          ↓            ↓          ↓          ↓        │
+│  File Upload  Instant   Processing  Smart Agent   AI         OKOA      Live       │
+│  Detection    Trigger   Queue       Selection     Analysis   Format    Updates    │
+│                                                                                     │
+│  Real-time Dashboard ← Live Metrics ← Cost Tracking ← Token Usage ← Agent Status  │
+│                                                                                     │
+└─────────────────────────────────────────────────────────────────────────────────────┘`}
+            </pre>
+          </div>
+        </div>
+
+        {/* System Status & Actions */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+          
+          {/* Quick Actions */}
+          <div className="bg-gray-800/50 backdrop-blur rounded-xl p-6 border border-gray-700">
+            <h3 className="text-lg font-semibold mb-4 text-green-400">🚀 Quick Actions</h3>
+            <div className="space-y-3">
+              
+              <Link 
+                href="/dashboard"
+                className="block w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-lg transition-colors text-center"
+              >
+                📊 View Live Dashboard
+              </Link>
+              
+              <Link 
+                href="/documents"
+                className="block w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 px-4 rounded-lg transition-colors text-center"
+              >
+                📄 Browse Documents
+              </Link>
+              
+              <Link 
+                href="/agents"
+                className="block w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-4 rounded-lg transition-colors text-center"
+              >
+                🤖 Manage Agents
+              </Link>
+            </div>
+          </div>
+
+          {/* System Info */}
+          <div className="bg-gray-800/50 backdrop-blur rounded-xl p-6 border border-gray-700">
+            <h3 className="text-lg font-semibold mb-4 text-yellow-400">⚙️ System Information</h3>
+            <div className="space-y-3 text-sm">
+              <div className="flex justify-between">
+                <span className="text-gray-400">Status:</span>
+                <span className="text-green-400 flex items-center">
+                  <div className="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></div>
+                  Online
+                </span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-gray-400">Version:</span>
+                <span className="text-blue-400">v0.1.0-alpha</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-gray-400">Processing Capacity:</span>
+                <span className="text-purple-400">1000+ docs/month</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-gray-400">Multi-Agent Pool:</span>
+                <span className="text-green-400">Auto-scaling (1-5 agents)</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-gray-400">Integration:</span>
+                <span className="text-blue-400">Box.com + Slack</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Processing Statistics Preview */}
+        <div className="bg-gray-800/30 backdrop-blur rounded-xl p-6 border border-gray-700">
+          <h2 className="text-lg font-semibold mb-4 text-center text-blue-400">Ready for Document Processing</h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+            <div>
+              <div className="text-2xl font-bold text-green-400">$0.85-1.35</div>
+              <div className="text-xs text-gray-400">Cost per document</div>
+            </div>
+            <div>
+              <div className="text-2xl font-bold text-blue-400">&lt;5 min</div>
+              <div className="text-xs text-gray-400">Processing time</div>
+            </div>
+            <div>
+              <div className="text-2xl font-bold text-purple-400">3 Models</div>
+              <div className="text-xs text-gray-400">Claude options</div>
+            </div>
+            <div>
+              <div className="text-2xl font-bold text-yellow-400">Real-time</div>
+              <div className="text-xs text-gray-400">Live monitoring</div>
+            </div>
+          </div>
+        </div>
+
+        {/* Footer */}
+        <div className="text-center mt-12 pt-8 border-t border-gray-700">
+          <p className="text-gray-400 text-sm">
+            © OKOA CAPITAL LLC - 2025 - OKOA LABS ENHANCED EDITION
+          </p>
+          <p className="text-gray-500 text-xs mt-2">
+            Institutional-grade document processing with zero-omission methodology
+          </p>
+        </div>
+      </div>
     </div>
   );
 }
