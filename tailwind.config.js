@@ -9,62 +9,60 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // Complete 15-Color Professional System
-        white: '#ffffff',
-        black: '#000000',
-        gray: {
-          50: '#f8f9fa',
-          100: '#f1f3f4',
-          200: '#e9ecef',
-          300: '#dee2e6',
-          400: '#ced4da',
-          500: '#adb5bd',
-          600: '#868e96',
-          700: '#495057',
-          800: '#343a40',
-          900: '#212529',
-        },
-        blue: {
-          500: '#0066cc',
-          600: '#0052a3',
-          dark: '#58a6ff',
-          light: '#79c0ff',
-        },
-        green: {
-          500: '#28a745',
-          dark: '#56d364',
-        },
-        red: {
-          500: '#dc3545',
-          dark: '#f85149',
-        },
-        dark: {
-          900: '#0d1117',
-          800: '#161b22',
-          700: '#21262d',
-          600: '#30363d',
-          500: '#484f58',
-          400: '#6e7681',
-          300: '#8b949e',
-          200: '#b1bac4',
-          100: '#c9d1d9',
-        },
-        light: {
-          900: '#f0f6fc',
-        },
-        // Legacy support for existing components
+        // Exact Figma Site Color Palette
+        'figma-cream-lightest': '#faf9f7',
+        'figma-text-dark': '#2d2d2d',
+        'figma-cream-light': '#f5f4f2',
+        'figma-cream': '#ede9e3',
+        'figma-gray-medium': '#4a4a4a',
+        'figma-gray': '#6b6b6b',
+        'figma-beige-light': '#e8e4de',
+        'figma-brown-accent': '#8b4513',
+        'figma-cream-warm': '#f0ede7',
+        'figma-beige': '#d4d0c8',
+        'figma-sage-green': '#7d8471',
+        'figma-tan': '#8b7355',
+        'figma-gray-warm': '#8b8680',
+        'figma-gold': '#a0926b',
+        'figma-green-sage': '#9ca986',
+        'figma-black-dark': '#1a1a1a',
+        'figma-black-medium': '#242424',
+        'figma-black-light': '#2f2f2f',
+        'figma-slate-blue': '#36454f',
+        'figma-orange-accent': '#cd853f',
+        'figma-black-soft': '#1f1f1f',
+        'figma-gray-muted': '#a19b94',
+        
+        // OKOA Semantic Colors Based on Figma Palette
+        'okoa-bg-primary': '#faf9f7',
+        'okoa-bg-secondary': '#f5f4f2', 
+        'okoa-bg-tertiary': '#ede9e3',
+        'okoa-fg-primary': '#2d2d2d',
+        'okoa-fg-secondary': '#4a4a4a',
+        'okoa-fg-muted': '#6b6b6b',
+        'okoa-accent-primary': '#8b4513',
+        'okoa-accent-secondary': '#8b7355',
+        'okoa-border-primary': '#d4d0c8',
+        'okoa-border-secondary': '#e8e4de',
+        
+        // Japanese-inspired color names
+        'japanese-paper-warm': '#faf9f7',
+        'japanese-ink-light': '#e8e4de',
+        'japanese-ink-sumi': '#1a1a1a',
+        'japanese-neutral-warm-gray': '#a19b94',
+        
+        // Legacy support 
+        white: '#faf9f7',
+        black: '#2d2d2d',
         primary: {
-          50: '#ffffff',
-          100: '#f8f9fa',
-          600: '#495057',
-          900: '#0d1117',
+          50: '#faf9f7',
+          100: '#f5f4f2',
+          600: '#4a4a4a',
+          900: '#2d2d2d',
         },
-        terminal: {
-          bg: '#ffffff',
-          border: '#dee2e6',
-          text: '#212529',
-          muted: '#495057',
-          accent: '#0066cc',
+        accent: {
+          primary: '#8b4513',
+          hover: '#8b7355',
         },
       },
       fontFamily: {
@@ -103,6 +101,7 @@ module.exports = {
       borderWidth: {
         DEFAULT: '1px',
         '0': '0px',
+        'thin': '1px',
         '2': '2px',
       },
       boxShadow: {

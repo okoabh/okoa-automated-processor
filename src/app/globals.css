@@ -1,80 +1,72 @@
 @import "tailwindcss";
 
-/* OKOA ASCII Terminal v5.0 - Complete Professional Color System */
+/* OKOA ASCII Terminal v5.0 - Exact Figma Color System */
 :root {
-  /* Complete 15-Color Professional Palette - Light Theme */
-  --color-white: #ffffff;
-  --color-gray-50: #f8f9fa;
-  --color-gray-100: #f1f3f4;
-  --color-gray-200: #e9ecef;
-  --color-gray-300: #dee2e6;
-  --color-gray-400: #ced4da;
-  --color-gray-500: #adb5bd;
-  --color-gray-600: #868e96;
-  --color-gray-700: #495057;
-  --color-gray-800: #343a40;
-  --color-gray-900: #212529;
-  --color-blue-500: #0066cc;
-  --color-blue-600: #0052a3;
-  --color-green-500: #28a745;
-  --color-red-500: #dc3545;
+  /* Exact Figma Site Colors - Light Mode */
+  --figma-cream-lightest: #faf9f7;
+  --figma-text-dark: #2d2d2d;
+  --figma-cream-light: #f5f4f2;
+  --figma-cream: #ede9e3;
+  --figma-gray-medium: #4a4a4a;
+  --figma-gray: #6b6b6b;
+  --figma-beige-light: #e8e4de;
+  --figma-brown-accent: #8b4513;
+  --figma-cream-warm: #f0ede7;
+  --figma-beige: #d4d0c8;
+  --figma-sage-green: #7d8471;
+  --figma-tan: #8b7355;
+  --figma-gray-warm: #8b8680;
+  --figma-gold: #a0926b;
+  --figma-green-sage: #9ca986;
   
   /* Semantic Color Mapping */
-  --bg-primary: var(--color-white);
-  --bg-secondary: var(--color-gray-50);
-  --bg-tertiary: var(--color-gray-100);
-  --bg-code: var(--color-gray-50);
-  --bg-card: var(--color-white);
-  --bg-hover: var(--color-gray-100);
-  --border-light: var(--color-gray-200);
-  --border-primary: var(--color-gray-300);
-  --border-secondary: var(--color-gray-400);
-  --text-primary: var(--color-gray-900);
-  --text-secondary: var(--color-gray-700);
-  --text-muted: var(--color-gray-600);
-  --text-inverse: var(--color-white);
-  --accent-primary: var(--color-blue-500);
-  --accent-hover: var(--color-blue-600);
-  --success: var(--color-green-500);
-  --error: var(--color-red-500);
+  --bg-primary: var(--figma-cream-lightest);
+  --bg-secondary: var(--figma-cream-light);
+  --bg-tertiary: var(--figma-cream);
+  --bg-code: var(--figma-cream-light);
+  --bg-card: var(--figma-cream-lightest);
+  --bg-hover: var(--figma-beige-light);
+  --border-light: var(--figma-beige-light);
+  --border-primary: var(--figma-beige);
+  --border-secondary: var(--figma-gray);
+  --text-primary: var(--figma-text-dark);
+  --text-secondary: var(--figma-gray-medium);
+  --text-muted: var(--figma-gray);
+  --text-inverse: var(--figma-cream-lightest);
+  --accent-primary: var(--figma-brown-accent);
+  --accent-hover: var(--figma-tan);
+  --success: var(--figma-sage-green);
+  --error: var(--figma-brown-accent);
 }
 
 .dark {
-  /* Complete 15-Color Professional Palette - Dark Theme */
-  --color-black: #000000;
-  --color-dark-900: #0d1117;
-  --color-dark-800: #161b22;
-  --color-dark-700: #21262d;
-  --color-dark-600: #30363d;
-  --color-dark-500: #484f58;
-  --color-dark-400: #6e7681;
-  --color-dark-300: #8b949e;
-  --color-dark-200: #b1bac4;
-  --color-dark-100: #c9d1d9;
-  --color-light-900: #f0f6fc;
-  --color-blue-dark: #58a6ff;
-  --color-blue-light: #79c0ff;
-  --color-green-dark: #56d364;
-  --color-red-dark: #f85149;
+  /* Exact Figma Site Colors - Dark Mode */
+  --figma-black-dark: #1a1a1a;
+  --figma-black-medium: #242424;
+  --figma-black-light: #2f2f2f;
+  --figma-slate-blue: #36454f;
+  --figma-orange-accent: #cd853f;
+  --figma-black-soft: #1f1f1f;
+  --figma-gray-muted: #a19b94;
   
-  /* Semantic Color Mapping */
-  --bg-primary: var(--color-black);
-  --bg-secondary: var(--color-dark-900);
-  --bg-tertiary: var(--color-dark-800);
-  --bg-code: var(--color-dark-800);
-  --bg-card: var(--color-dark-900);
-  --bg-hover: var(--color-dark-700);
-  --border-light: var(--color-dark-600);
-  --border-primary: var(--color-dark-500);
-  --border-secondary: var(--color-dark-400);
-  --text-primary: var(--color-light-900);
-  --text-secondary: var(--color-dark-100);
-  --text-muted: var(--color-dark-200);
-  --text-inverse: var(--color-dark-900);
-  --accent-primary: var(--color-blue-dark);
-  --accent-hover: var(--color-blue-light);
-  --success: var(--color-green-dark);
-  --error: var(--color-red-dark);
+  /* Semantic Color Mapping for Dark Mode */
+  --bg-primary: var(--figma-black-dark);
+  --bg-secondary: var(--figma-black-medium);
+  --bg-tertiary: var(--figma-black-light);
+  --bg-code: var(--figma-black-soft);
+  --bg-card: var(--figma-black-medium);
+  --bg-hover: var(--figma-slate-blue);
+  --border-light: var(--figma-slate-blue);
+  --border-primary: var(--figma-gray-muted);
+  --border-secondary: var(--figma-beige-light);
+  --text-primary: var(--figma-beige-light);
+  --text-secondary: var(--figma-beige);
+  --text-muted: var(--figma-gray-muted);
+  --text-inverse: var(--figma-black-dark);
+  --accent-primary: var(--figma-orange-accent);
+  --accent-hover: var(--figma-gold);
+  --success: var(--figma-green-sage);
+  --error: var(--figma-orange-accent);
 }
 
 /* Perfect Monospace Typography Stack */
