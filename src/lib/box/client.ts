@@ -12,18 +12,36 @@ export class BoxClient {
     const enterpriseId = process.env.BOX_ENTERPRISE_ID;
     
     if (!clientId || !clientSecret || !enterpriseId) {
-      throw new Error('Box.com configuration missing. Please set BOX_CLIENT_ID, BOX_CLIENT_SECRET, and BOX_ENTERPRISE_ID');
+      console.warn('Box.com configuration missing. Box features will be disabled.');
+      return;
     }
     
-    this.sdk = BoxSDK.getPreconfiguredInstance({
-      clientID: clientId,
-      clientSecret: clientSecret,
-      enterpriseID: enterpriseId,
-    });
+    try {
+      this.sdk = BoxSDK.getPreconfiguredInstance({
+        clientID: clientId,
+        clientSecret: clientSecret,
+        enterpriseID: enterpriseId,
+        boxAppSettings: {
+          clientID: clientId,
+          clientSecret: clientSecret,
+          appAuth: {
+            keyID: process.env.BOX_KEY_ID || '',
+            privateKey: process.env.BOX_PRIVATE_KEY || '',
+            passphrase: process.env.BOX_PASSPHRASE || '',
+          }
+        }
+      });
+    } catch (error) {
+      console.warn('Box SDK initialization failed:', error);
+    }
   }
   
   async initialize(): Promise<void> {
     if (this.initialized) return;
+    if (!this.sdk) {
+      console.warn('Box SDK not initialized, skipping');
+      return;
+    }
     
     try {
       this.client = this.sdk.getAppAuthClient('enterprise');
@@ -34,8 +52,8 @@ export class BoxClient {
       
       this.initialized = true;
     } catch (error) {
-      console.error('Failed to initialize Box client:', error);
-      throw new Error('Box.com authentication failed');
+      console.warn('Failed to initialize Box client:', error);
+      // Don't throw - just disable Box features
     }
   }
   

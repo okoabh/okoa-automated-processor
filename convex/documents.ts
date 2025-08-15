@@ -4,19 +4,26 @@ import { mutation, query } from "./_generated/server";
 // Create a new document record
 export const create = mutation({
   args: {
-    filename: v.string(),
-    originalFilename: v.string(),
-    filePath: v.string(),
-    boxFileId: v.optional(v.string()),
+    folderId: v.optional(v.id("folders")),
+    dealId: v.optional(v.id("deals")),
+    fileName: v.string(),
     fileSize: v.number(),
+    fileType: v.optional(v.string()),
+    status: v.optional(v.union(v.literal("UPLOADED"), v.literal("PENDING"), v.literal("PROCESSING"), v.literal("COMPLETED"), v.literal("FAILED"))),
+    uploadedAt: v.optional(v.string()),
+    boxFileId: v.optional(v.string()),
+    metadata: v.optional(v.any()),
+    // Legacy fields for compatibility
+    filename: v.optional(v.string()),
+    originalFilename: v.optional(v.string()),
+    filePath: v.optional(v.string()),
     mimeType: v.optional(v.string()),
     fileHash: v.optional(v.string()),
-    metadata: v.optional(v.any()),
   },
   handler: async (ctx, args) => {
     const documentId = await ctx.db.insert("documents", {
       ...args,
-      status: "PENDING",
+      status: args.status || "UPLOADED",
       createdAt: Date.now(),
     });
     
@@ -142,5 +149,41 @@ export const getProcessingStats = query({
       last24Hours: stats,
       successRate: stats.total > 0 ? (stats.completed / stats.total) * 100 : 0,
     };
+  },
+});
+
+// Create document with extended metadata for deal organization
+export const createDocument = mutation({
+  args: {
+    folderId: v.string(),
+    name: v.string(),
+    type: v.string(),
+    path: v.optional(v.string()),
+    content: v.optional(v.string()),
+    status: v.optional(v.string()),
+    metadata: v.optional(v.any()),
+  },
+  handler: async (ctx, args) => {
+    const documentId = await ctx.db.insert("documents", {
+      ...args,
+      status: args.status || "pending",
+      createdAt: Date.now(),
+      fileName: args.name,
+      fileSize: args.content?.length || 0,
+    });
+    
+    return documentId;
+  },
+});
+
+// Get documents by folder ID
+export const listByFolder = query({
+  args: { folderId: v.string() },
+  handler: async (ctx, { folderId }) => {
+    return await ctx.db
+      .query("documents")
+      .filter((q) => q.eq(q.field("folderId"), folderId))
+      .order("desc")
+      .collect();
   },
 });

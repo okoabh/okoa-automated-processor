@@ -1,6 +1,7 @@
-import type { Metadata } from "next";
+"use client";
 import { Geist, Geist_Mono } from "next/font/google";
 import { ConvexProvider, ConvexReactClient } from "convex/react";
+import { ThemeProvider } from "@/components/ThemeProvider";
 import "./globals.css";
 
 const geist = Geist({
@@ -13,11 +14,6 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: "OKOA Automated Document Processing System",
-  description: "Institutional-grade multi-agent document processing with real-time monitoring",
-};
-
 const convex = new ConvexReactClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
 
 export default function RootLayout({
@@ -27,9 +23,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <title>OKOA Automated Document Processing System</title>
+        <meta name="description" content="Institutional-grade multi-agent document processing with real-time monitoring" />
+      </head>
       <body className={`${geist.variable} ${geistMono.variable} antialiased`}>
         <ConvexProvider client={convex}>
-          {children}
+          <ThemeProvider>
+            {children}
+          </ThemeProvider>
         </ConvexProvider>
       </body>
     </html>

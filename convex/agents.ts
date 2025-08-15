@@ -1,5 +1,6 @@
 import { v } from "convex/values";
 import { mutation, query, action } from "./_generated/server";
+import { api } from "./_generated/api";
 
 // Create a new agent
 export const create = mutation({
@@ -217,7 +218,7 @@ export const cleanupIdleAgents = action({
     const now = Date.now();
     const idleThreshold = 5 * 60 * 1000; // 5 minutes
     
-    const agents = await ctx.runQuery("agents:getActive");
+    const agents = await ctx.runQuery(api.agents.list);
     
     const idleAgents = agents.filter(agent => {
       const isIdle = (now - agent.lastActiveAt) > idleThreshold;
@@ -228,7 +229,7 @@ export const cleanupIdleAgents = action({
     
     // Remove idle agents
     for (const agent of idleAgents) {
-      await ctx.runMutation("agents:remove", { agentId: agent.agentId });
+      await ctx.runMutation(api.agents.remove, { agentId: agent.agentId });
     }
     
     return {

@@ -2,6 +2,37 @@ import { defineSchema, defineTable } from "convex/server";
 import { v } from "convex/values";
 
 export default defineSchema({
+  // Deals table
+  deals: defineTable({
+    name: v.string(),
+    description: v.optional(v.string()),
+    dealType: v.string(), // e.g., "real-estate", "acquisition", "refinancing"
+    status: v.union(
+      v.literal("ACTIVE"),
+      v.literal("COMPLETED"),
+      v.literal("ON_HOLD"),
+      v.literal("CANCELLED")
+    ),
+    
+    // Box.com integration
+    boxFolderId: v.optional(v.string()),
+    
+    // Statistics
+    documentCount: v.number(),
+    totalProcessingCost: v.number(),
+    
+    // Metadata
+    metadata: v.optional(v.any()),
+    
+    // Timestamps
+    createdAt: v.number(),
+    updatedAt: v.number(),
+  })
+    .index("by_status", ["status"])
+    .index("by_dealType", ["dealType"])
+    .index("by_boxFolderId", ["boxFolderId"])
+    .index("by_createdAt", ["createdAt"]),
+
   // Documents table
   documents: defineTable({
     filename: v.string(),
@@ -11,6 +42,9 @@ export default defineSchema({
     fileSize: v.number(),
     mimeType: v.optional(v.string()),
     fileHash: v.optional(v.string()),
+    
+    // Deal association
+    dealId: v.optional(v.id("deals")),
     
     // Classification
     documentType: v.optional(v.string()),
@@ -42,7 +76,8 @@ export default defineSchema({
     .index("by_status", ["status"])
     .index("by_ddCode", ["ddCode"])
     .index("by_boxFileId", ["boxFileId"])
-    .index("by_assignedAgent", ["assignedAgentId"]),
+    .index("by_assignedAgent", ["assignedAgentId"])
+    .index("by_dealId", ["dealId"]),
 
   // Processing jobs and results
   processingJobs: defineTable({
@@ -175,6 +210,39 @@ export default defineSchema({
   })
     .index("by_metricType", ["metricType"])
     .index("by_timestamp", ["timestamp"]),
+
+  // Fireflies.ai pending transcript approvals
+  firefliesPending: defineTable({
+    transcriptId: v.string(),
+    title: v.string(),
+    date: v.string(),
+    duration: v.number(),
+    participants: v.array(v.object({
+      name: v.string(),
+      email: v.optional(v.string())
+    })),
+    summary: v.optional(v.string()),
+    meetingUrl: v.optional(v.string()),
+    rawTranscriptData: v.any(),
+    
+    // Processing status
+    status: v.union(
+      v.literal("pending_approval"),
+      v.literal("approved"),
+      v.literal("rejected")
+    ),
+    
+    // Assignment
+    suggestedDealId: v.optional(v.id("deals")),
+    assignedDealId: v.optional(v.id("deals")),
+    
+    // Timestamps
+    createdAt: v.number(),
+    processedAt: v.optional(v.number()),
+  })
+    .index("by_status", ["status"])
+    .index("by_transcriptId", ["transcriptId"])
+    .index("by_createdAt", ["createdAt"]),
 
   // Notification history
   notifications: defineTable({

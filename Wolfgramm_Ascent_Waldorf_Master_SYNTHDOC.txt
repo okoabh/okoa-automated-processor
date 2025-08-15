@@ -1,0 +1,107 @@
+# ╔══════════════════════════════════════════════════════════════════════════════════╗
+# ║   ██████╗ ██╗  ██╗ ██████╗  █████╗      ██╗      █████╗ ██████╗ ███████╗    ║
+# ║  ██╔═══██╗██║ ██╔╝██╔═══██╗██╔══██╗     ██║     ██╔══██╗██╔══██╗██╔════╝    ║
+# ║  ██║   ██║█████╔╝ ██║   ██║███████║     ██║     ███████║██████╔╝███████╗    ║
+# ║  ██║   ██║██╔═██╗ ██║   ██║██╔══██║     ██║     ██╔══██║██╔══██╗╚════██║    ║
+# ║  ╚██████╔╝██║  ██╗╚██████╔╝██║  ██║     ███████╗██║  ██║██████╔╝███████║    ║
+# ║   ╚═════╝ ╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═╝     ╚══════╝╚═╝  ╚═╝╚═════╝ ╚══════╝    ║
+# ╠══════════════════════════════════════════════════════════════════════════════════╣
+# ║              WOLFGRAMM ASCENT WALDORF - MASTER SYNTHESIS DOCUMENT              ║
+# ║                           OKOA LABS ENHANCED EDITION                           ║
+# ╚══════════════════════════════════════════════════════════════════════════════════╝
+
+DEAL_CLASSIFICATION: "Hospitality/Resort Development - Condo Hotel"
+PROPERTY_LOCATION: "4080 Cooper Lane, Park City, Summit County, UT 84098"
+DEAL_STATUS: "Development Phase - Construction in Progress"
+OWNER_ENTITY: "Wolfgramm Capital LLC"
+CLIENT_ENTITY: "OKOA Capital, LLC"
+
+## EXECUTIVE SUMMARY
+
+### Property Overview
+- **Asset Type**: 120-room Tapestry Collection by Hilton hotel
+- **Site**: 2.24-acre development site in Park City, Utah
+- **Structure**: Condo hotel - 61 units third-party owned, 59 retained by ownership
+- **Configuration**: 4-story full-service facility with restaurant, pool, meeting space
+- **Brand**: Tapestry Collection by Hilton (franchise agreement in place)
+
+### Valuation Summary
+- **As Is Market Value** (Nov 1, 2023): $43,800,000 ($365,000/key)
+- **Prospective Value Upon Completion** (Nov 1, 2024): $69,000,000 ($575,000/key)  
+- **Prospective Value Upon Stabilization** (Nov 1, 2026): $78,000,000 ($650,000/key)
+- **Gross Condo Proceeds Estimate**: $25,500,000 ($213,000/key)
+
+### Financial Structure Analysis
+- **Total Development Budget**: $74,589,341 ($621,578/key)
+- **Land Acquisition Cost**: $14,000,000 ($116,667/key)
+- **Capital Deployed to Date**: $36,298,082 (51% of total cost)
+- **Remaining Capital Required**: $38,291,259 (49% of total cost)
+
+### Market Position & Risk Assessment
+
+#### CONSTRUCTION RISK: **MEDIUM**
+- 51% construction completion as of report date
+- Timeline dependent on continued funding and execution
+- Total remaining CapEx: $38.3M over ~12 months
+
+#### MARKET RISK: **LOW-MEDIUM** 
+- Park City resort market provides stable demand fundamentals
+- Branded asset reduces market risk through established distribution
+- Condo hotel structure diversifies revenue streams
+
+#### OPERATIONAL RISK: **MEDIUM**
+- Complex condo hotel management structure requiring specialized expertise
+- 68 pre-sold units with deposits, 7 units at risk of non-closing
+- Assumed management fee structure: 4.00% of total revenue
+
+#### FINANCING RISK: **REQUIRES ANALYSIS**
+- Current financing structure not detailed in available documentation
+- Completion risk tied to construction funding availability
+
+### Strategic Considerations for OKOA Capital
+
+#### INVESTMENT POSITIVES:
+- **Strong Market Fundamentals**: Park City resort destination with consistent demand
+- **Brand Partnership**: Hilton affiliation reduces operational and marketing risk
+- **Revenue Diversification**: Hotel operations + condo sales provide multiple exit strategies
+- **Development Progress**: 51% completion reduces construction timeline risk
+
+#### INVESTMENT CONCERNS:
+- **Execution Risk**: Remaining $38M CapEx requirement over 12-month timeline
+- **Market Timing**: Completion scheduled for peak market cycle (2024-2026)
+- **Operational Complexity**: Condo hotel structures require specialized management
+
+#### DUE DILIGENCE REQUIREMENTS:
+- Current financing terms and covenant compliance analysis
+- Construction budget verification and completion risk assessment
+- Market demand analysis for Park City hospitality sector
+- Management agreement terms and fee structure validation
+- Pre-sales contract analysis and buyer qualification review
+
+### MIDNIGHT ATLAS PRISM RISK ASSESSMENT
+
+**OVERALL RISK RATING: MEDIUM**
+
+**PRIMARY RISK VECTORS:**
+1. **Construction Completion**: Timeline and budget adherence critical
+2. **Pre-Sales Execution**: 7 units at risk impacts project economics  
+3. **Market Cycle Timing**: Completion during potential market peak
+4. **Operational Transition**: Hotel-to-condo conversion complexity
+
+**RECOMMENDED ACTIONS:**
+1. Comprehensive construction budget and timeline audit
+2. Pre-sales contract and buyer creditworthiness analysis  
+3. Market demand study for Park City hospitality/residential sectors
+4. Management structure and fee analysis
+5. Financing covenant compliance and refinancing risk assessment
+
+---
+
+**DOCUMENT METADATA:**
+- **Generated**: 2025-08-15T15:25:00.000Z
+- **Analysis Agent**: MIDNIGHT_ATLAS_PRISM_v1.1_RE_EDITION  
+- **OKOA Reference**: WOLFGRAMM_ASCENT_WALDORF_2025
+- **Classification**: Institutional Due Diligence Report
+- **Status**: PRELIMINARY ANALYSIS - REQUIRES ADDITIONAL DATA VERIFICATION
+
+**© OKOA CAPITAL LLC - 2025 - OKOA LABS ENHANCED EDITION**
