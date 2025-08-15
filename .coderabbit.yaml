@@ -3,11 +3,7 @@
 
 language: en-US
 early_access: false
-tone_instructions: |
-  - Use professional, institutional-grade language appropriate for financial services
-  - Focus on security, performance, and maintainability
-  - Highlight potential risks in financial data processing
-  - Emphasize OKOA Labs coding standards and ASCII visual consistency
+tone_instructions: "Use a professional, institutional-grade tone; prioritize security, performance"
 
 reviews:
   profile: chill

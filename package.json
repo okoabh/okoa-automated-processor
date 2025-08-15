@@ -25,6 +25,7 @@
     "convex": "^1.25.4",
     "decimal.js": "^10.6.0",
     "figlet": "^1.8.2",
+    "isomorphic-dompurify": "^2.26.0",
     "js-yaml": "^4.1.0",
     "jsonwebtoken": "^9.0.2",
     "multer": "^2.0.2",

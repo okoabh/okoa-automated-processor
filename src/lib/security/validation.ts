@@ -4,6 +4,9 @@
  */
 
 import { z } from 'zod';
+import createDOMPurify from 'isomorphic-dompurify';
+
+const DOMPurify = createDOMPurify();
 
 // Financial data validation schema
 export const FinancialDataSchema = z.object({
@@ -35,12 +38,11 @@ export const ChatMessageSchema = z.object({
  * @returns Sanitized string
  */
 export function sanitizeInput(input: string): string {
-  return input
-    .replace(/[<>]/g, '') // Remove HTML tags
-    .replace(/['"]/g, '') // Remove quotes to prevent injection
-    .replace(/javascript:/gi, '') // Remove javascript: protocol
-    .replace(/on\w+=/gi, '') // Remove event handlers
-    .trim();
+  return DOMPurify.sanitize(input, { 
+    ALLOWED_TAGS: [], 
+    ALLOWED_ATTR: [], 
+    ALLOW_DATA_ATTR: false 
+  }).trim();
 }
 
 /**

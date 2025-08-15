@@ -44,7 +44,11 @@ export class FinancialCalculator {
     const budget = new Decimal(totalBudget);
     const spent = new Decimal(spentAmount);
     const remaining = budget.minus(spent);
-    const completionPercentage = spent.dividedBy(budget).times(100);
+    
+    // Guard against division by zero
+    const completionPercentage = budget.isZero() 
+      ? new Decimal(0) 
+      : spent.dividedBy(budget).times(100);
     
     return {
       totalBudget: budget.toFixed(2),
@@ -66,6 +70,14 @@ export class FinancialCalculator {
     const initial = new Decimal(initialInvestment);
     const projected = new Decimal(projectedValue);
     const years = new Decimal(timeHorizonYears);
+    
+    // Validate inputs to prevent division by zero
+    if (initial.isZero()) {
+      throw new Error('Initial investment must be greater than 0');
+    }
+    if (years.isZero()) {
+      throw new Error('Time horizon (years) must be greater than 0');
+    }
     
     const totalReturn = projected.minus(initial);
     const totalReturnPercentage = totalReturn.dividedBy(initial).times(100);
