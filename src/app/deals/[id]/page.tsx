@@ -5,6 +5,7 @@ import { useParams } from 'next/navigation';
 import { InteractiveButton } from '@/components/ascii/InteractiveButton';
 import { FinancialAnalysis } from '@/components/deals/FinancialAnalysis';
 import { TranscriptUpload } from '@/components/deals/TranscriptUpload';
+import { AISidebar, AIFloatingButton } from '@/components/ai/AISidebar';
 import Link from 'next/link';
 
 interface Document {
@@ -26,11 +27,6 @@ interface Folder {
   boxFolderId?: string;
 }
 
-interface ChatMessage {
-  type: 'user' | 'assistant';
-  content: string;
-  timestamp: number;
-}
 
 export default function DealPage() {
   const params = useParams();
@@ -51,11 +47,9 @@ export default function DealPage() {
     synthdoc: []
   });
   
-  const [chatMessages, setChatMessages] = useState<ChatMessage[]>([]);
-  const [currentMessage, setCurrentMessage] = useState('');
   const [isLoading, setIsLoading] = useState(true);
-  const [isChatLoading, setIsChatLoading] = useState(false);
-  const [activeTab, setActiveTab] = useState<'documents' | 'financial' | 'chat' | 'transcripts'>('documents');
+  const [activeTab, setActiveTab] = useState<'documents' | 'financial' | 'transcripts'>('documents');
+  const [isAISidebarOpen, setIsAISidebarOpen] = useState(false);
 
   useEffect(() => {
     if (dealId) {
@@ -79,50 +73,6 @@ export default function DealPage() {
     }
   };
 
-  const sendChatMessage = async () => {
-    if (!currentMessage.trim() || isChatLoading) return;
-
-    const userMessage: ChatMessage = {
-      type: 'user',
-      content: currentMessage,
-      timestamp: Date.now()
-    };
-
-    setChatMessages(prev => [...prev, userMessage]);
-    setCurrentMessage('');
-    setIsChatLoading(true);
-
-    try {
-      const response = await fetch(`/api/deals/${dealId}/chat`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ 
-          message: currentMessage,
-          context: documents
-        })
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        const aiMessage: ChatMessage = {
-          type: 'assistant',
-          content: data.response,
-          timestamp: Date.now()
-        };
-        setChatMessages(prev => [...prev, aiMessage]);
-      }
-    } catch (error) {
-      console.error('Chat error:', error);
-      const errorMessage: ChatMessage = {
-        type: 'assistant',
-        content: 'Sorry, I encountered an error processing your request.',
-        timestamp: Date.now()
-      };
-      setChatMessages(prev => [...prev, errorMessage]);
-    } finally {
-      setIsChatLoading(false);
-    }
-  };
 
   if (isLoading) {
     return (
@@ -198,16 +148,17 @@ export default function DealPage() {
             💰 FINANCIAL
           </InteractiveButton>
           <InteractiveButton
-            onClick={() => setActiveTab('chat')}
-            variant={activeTab === 'chat' ? 'primary' : 'secondary'}
-          >
-            🤖 AI ANALYSIS
-          </InteractiveButton>
-          <InteractiveButton
             onClick={() => setActiveTab('transcripts')}
             variant={activeTab === 'transcripts' ? 'primary' : 'secondary'}
           >
             📞 TRANSCRIPTS
+          </InteractiveButton>
+          <InteractiveButton
+            onClick={() => setIsAISidebarOpen(true)}
+            variant="primary"
+            className="bg-accent-primary hover:bg-accent-hover"
+          >
+            🤖 AI ANALYSIS
           </InteractiveButton>
         </div>
 
@@ -341,96 +292,6 @@ export default function DealPage() {
           </div>
         )}
 
-        {/* Chat Tab */}
-        {activeTab === 'chat' && (
-          <div className="max-w-4xl mx-auto">
-            
-            {/* Agent Header */}
-            <div className="terminal-header p-4 mb-6" style={{backgroundColor: 'var(--bg-tertiary)', color: 'var(--text-primary)'}}>
-              <div className="font-mono text-sm text-center">
-                🤖 MIDNIGHT ATLAS PRISM v1.1 - REAL ESTATE ANALYSIS AGENT
-              </div>
-              <div className="text-xs text-center mt-2" style={{color: 'var(--text-muted)'}}>
-                Institutional-grade real estate analysis • Financial modeling • Risk assessment
-              </div>
-              {isChatLoading && (
-                <div className="text-xs text-center mt-2 animate-pulse" style={{color: 'var(--accent-primary)'}}>
-                  ⚡ I'm analyzing the documents and formulating a response...
-                </div>
-              )}
-            </div>
-
-            {/* Chat Messages */}
-            <div className="terminal-content p-4 mb-4 min-h-[400px] max-h-[500px] overflow-y-auto">
-              {chatMessages.length === 0 ? (
-                <div className="text-center font-mono text-sm py-8" style={{color: 'var(--text-secondary)'}}>
-                  <div className="mb-4">💬</div>
-                  <div>Start a conversation with the AI agent</div>
-                  <div className="text-xs mt-2">Ask about document analysis, risk assessment, financial modeling, or deal structure</div>
-                </div>
-              ) : (
-                <div className="space-y-4">
-                  {chatMessages.map((msg, idx) => (
-                    <div key={idx} className="p-3" style={{
-                      backgroundColor: msg.type === 'user' ? 'var(--bg-hover)' : 'var(--bg-tertiary)',
-                      color: 'var(--text-primary)',
-                      border: '1px solid var(--border-primary)'
-                    }}>
-                      <div className="text-xs font-mono mb-1 opacity-70">
-                        {msg.type === 'user' ? '👤 USER' : '🤖 MIDNIGHT ATLAS PRISM'}
-                      </div>
-                      <div className="text-sm font-mono whitespace-pre-wrap">
-                        {msg.content}
-                      </div>
-                    </div>
-                  ))}
-                  {isChatLoading && (
-                    <div className="p-3" style={{
-                      backgroundColor: 'var(--bg-tertiary)',
-                      color: 'var(--text-primary)',
-                      border: '1px solid var(--border-primary)'
-                    }}>
-                      <div className="text-xs font-mono mb-1 opacity-70">🤖 MIDNIGHT ATLAS PRISM</div>
-                      <div className="text-sm font-mono">
-                        <span className="animate-pulse">⚡ I'm thinking about your question...</span>
-                        <br />
-                        <span className="text-xs opacity-60">Accessing deal documents • Running analysis • Calculating risk metrics</span>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              )}
-            </div>
-
-            {/* Chat Input */}
-            <div className="terminal-content p-4">
-              <div className="flex space-x-2">
-                <input
-                  type="text"
-                  value={currentMessage}
-                  onChange={(e) => setCurrentMessage(e.target.value)}
-                  onKeyPress={(e) => e.key === 'Enter' && sendChatMessage()}
-                  placeholder="Ask about the deal documents, financial analysis, risk factors..."
-                  className="flex-1 p-3 font-mono text-sm focus:outline-none"
-                  style={{
-                    backgroundColor: 'var(--bg-primary)',
-                    color: 'var(--text-primary)',
-                    border: '1px solid var(--border-primary)',
-                    borderColor: currentMessage.trim() ? 'var(--accent-primary)' : 'var(--border-primary)'
-                  }}
-                  disabled={isChatLoading}
-                />
-                <InteractiveButton
-                  onClick={sendChatMessage}
-                  variant="primary"
-                  disabled={!currentMessage.trim() || isChatLoading}
-                >
-                  {isChatLoading ? '⚡ ANALYZING...' : 'SEND →'}
-                </InteractiveButton>
-              </div>
-            </div>
-          </div>
-        )}
 
         {/* Transcripts Tab */}
         {activeTab === 'transcripts' && (
@@ -442,6 +303,20 @@ export default function DealPage() {
           </div>
         )}
       </div>
+
+      {/* AI Sidebar */}
+      <AISidebar
+        isOpen={isAISidebarOpen}
+        onToggle={() => setIsAISidebarOpen(!isAISidebarOpen)}
+        dealId={dealId}
+        dealName={folder?.name}
+        context={documents}
+      />
+
+      {/* Floating AI Button (only show when sidebar is closed) */}
+      {!isAISidebarOpen && (
+        <AIFloatingButton onClick={() => setIsAISidebarOpen(true)} />
+      )}
     </div>
   );
 }

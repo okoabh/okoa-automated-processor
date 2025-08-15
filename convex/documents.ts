@@ -174,14 +174,26 @@ export const createDocument = mutation({
     metadata: v.optional(v.any()),
   },
   handler: async (ctx, args) => {
-    const documentId = await ctx.db.insert("documents", {
-      ...args,
-      status: args.status || "pending",
-      createdAt: Date.now(),
-      fileName: args.name,
+    // Map to schema fields properly
+    const documentData = {
+      filename: args.name,
+      originalFilename: args.name,
+      filePath: args.path || `/uploads/${args.name}`,
       fileSize: args.content?.length || 0,
-    });
+      status: args.status === "pending" ? "PENDING" : (args.status?.toUpperCase() || "PENDING"),
+      createdAt: Date.now(),
+      category: args.type,
+      documentType: args.type,
+      metadata: {
+        ...args.metadata,
+        folderId: args.folderId,
+        dealName: args.metadata?.dealName || 'Unknown Deal',
+        type: args.type,
+        content: args.content
+      }
+    };
     
+    const documentId = await ctx.db.insert("documents", documentData);
     return documentId;
   },
 });
@@ -190,10 +202,45 @@ export const createDocument = mutation({
 export const listByFolder = query({
   args: { folderId: v.string() },
   handler: async (ctx, { folderId }) => {
+    // First try to find documents with folderId in metadata
+    const docsByMetadata = await ctx.db
+      .query("documents")
+      .filter((q) => q.eq(q.field("metadata.folderId"), folderId))
+      .order("desc")
+      .collect();
+    
+    if (docsByMetadata.length > 0) {
+      return docsByMetadata;
+    }
+    
+    // Fallback: look for documents with direct folderId field (if any exist)
     return await ctx.db
       .query("documents")
       .filter((q) => q.eq(q.field("folderId"), folderId))
       .order("desc")
       .collect();
+  },
+});
+
+// Fix existing documents by adding folderId to metadata
+export const fixDocumentFolderAssociation = mutation({
+  args: {
+    documentId: v.id("documents"),
+    folderId: v.string()
+  },
+  handler: async (ctx, { documentId, folderId }) => {
+    const doc = await ctx.db.get(documentId);
+    if (!doc) {
+      throw new Error("Document not found");
+    }
+    
+    await ctx.db.patch(documentId, {
+      metadata: {
+        ...doc.metadata,
+        folderId: folderId
+      }
+    });
+    
+    return { success: true };
   },
 });
