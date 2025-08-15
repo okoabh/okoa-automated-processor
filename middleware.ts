@@ -2,8 +2,9 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
 export function middleware(request: NextRequest) {
-  // Skip middleware for API routes and webhooks
-  if (request.nextUrl.pathname.startsWith('/api/')) {
+  // Skip middleware for API routes, webhooks, and login page
+  if (request.nextUrl.pathname.startsWith('/api/') || 
+      request.nextUrl.pathname.startsWith('/login')) {
     return NextResponse.next()
   }
 
@@ -12,7 +13,6 @@ export function middleware(request: NextRequest) {
   
   if (isPasswordProtected) {
     const basicAuth = request.headers.get('authorization')
-    const url = request.nextUrl
 
     if (basicAuth) {
       const authValue = basicAuth.split(' ')[1]
@@ -23,9 +23,9 @@ export function middleware(request: NextRequest) {
       }
     }
 
-    url.pathname = '/api/auth'
-
-    return NextResponse.rewrite(url)
+    // Redirect to login page instead of basic auth prompt
+    const loginUrl = new URL('/login', request.url)
+    return NextResponse.redirect(loginUrl)
   }
 
   return NextResponse.next()

@@ -21,13 +21,56 @@ export async function GET(
     // Get all documents for this folder
     const documents = await convex.query(api.documents.listByFolder, { folderId: id });
 
-    // Organize documents by type
+    // Organize documents by type with enhanced pattern matching
     const organizedDocs = {
-      original: documents.filter(doc => doc.type === 'original'),
-      ocr: documents.filter(doc => doc.type === 'ocr'),
-      plaintext: documents.filter(doc => doc.type === 'plaintext'),
-      synthetic: documents.filter(doc => doc.type === 'synthetic'),
-      synthdoc: documents.filter(doc => doc.name?.toLowerCase().includes('synthdoc'))
+      original: documents.filter(doc => {
+        const name = (doc.filename || doc.originalFilename || '').toLowerCase();
+        return (
+          doc.category === 'original' || 
+          doc.documentType === 'original' ||
+          doc.type === 'original' ||
+          (name.endsWith('.pdf') || name.endsWith('.xlsx') || name.endsWith('.docx')) &&
+          !name.includes('_ocr') && !name.includes('extract') && 
+          !name.includes('summary') && !name.includes('synthdoc')
+        );
+      }),
+      ocr: documents.filter(doc => {
+        const name = (doc.filename || doc.originalFilename || '').toLowerCase();
+        return (
+          doc.category === 'ocr' || 
+          doc.documentType === 'ocr' ||
+          doc.type === 'ocr' ||
+          name.includes('_ocr')
+        );
+      }),
+      plaintext: documents.filter(doc => {
+        const name = (doc.filename || doc.originalFilename || '').toLowerCase();
+        return (
+          doc.category === 'plaintext' || 
+          doc.documentType === 'plaintext' ||
+          doc.type === 'plaintext' ||
+          name.includes('extract')
+        );
+      }),
+      synthetic: documents.filter(doc => {
+        const name = (doc.filename || doc.originalFilename || '').toLowerCase();
+        return (
+          doc.category === 'synthetic' || 
+          doc.documentType === 'synthetic' ||
+          doc.type === 'synthetic' ||
+          name.includes('summary') ||
+          name.includes('analysis')
+        );
+      }),
+      synthdoc: documents.filter(doc => {
+        const name = (doc.filename || doc.originalFilename || '').toLowerCase();
+        return (
+          doc.category === 'synthdoc' || 
+          doc.documentType === 'synthdoc' ||
+          doc.type === 'synthdoc' ||
+          name.includes('synthdoc')
+        );
+      })
     };
 
     return NextResponse.json({
