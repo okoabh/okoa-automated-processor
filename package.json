@@ -23,6 +23,7 @@
     "box-node-sdk": "^3.8.2",
     "concurrently": "^9.2.0",
     "convex": "^1.25.4",
+    "decimal.js": "^10.6.0",
     "figlet": "^1.8.2",
     "js-yaml": "^4.1.0",
     "jsonwebtoken": "^9.0.2",
@@ -33,7 +34,8 @@
     "react-ascii-text": "^0.0.4",
     "react-dom": "19.1.0",
     "redis": "^5.8.1",
-    "sharp": "^0.34.3"
+    "sharp": "^0.34.3",
+    "zod": "^3.25.76"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

@@ -1,0 +1,86 @@
+# CodeRabbit Configuration for OKOA Automated Document Processing System
+# Enhanced configuration for institutional-grade code review
+
+language: en-US
+early_access: false
+tone_instructions: |
+  - Use professional, institutional-grade language appropriate for financial services
+  - Focus on security, performance, and maintainability
+  - Highlight potential risks in financial data processing
+  - Emphasize OKOA Labs coding standards and ASCII visual consistency
+
+reviews:
+  profile: chill
+  request_changes_workflow: false
+  high_level_summary: true
+  high_level_summary_placeholder: |
+    ## CodeRabbit Summary
+    
+    This review focuses on code quality, security, and adherence to OKOA Labs standards.
+    
+  poem: true
+  review_status: true
+  collapse_empty_files: true
+  auto_review:
+    enabled: true
+    ignore_title_keywords:
+      - "WIP"
+      - "DO NOT MERGE"
+      - "DRAFT"
+    
+chat:
+  auto_reply: true
+
+# File patterns to focus on
+patterns:
+  - "**/*.ts"
+  - "**/*.tsx" 
+  - "**/*.js"
+  - "**/*.jsx"
+  - "**/*.yaml"
+  - "**/*.yml"
+  - "**/convex/**"
+  - "**/src/**"
+
+# Areas of special focus for OKOA system
+focus_areas:
+  - security: |
+      Pay special attention to:
+      - API key handling and environment variables
+      - Data validation in financial calculations
+      - User input sanitization
+      - Box.com and Slack integration security
+  
+  - performance: |
+      Monitor for:
+      - Database query optimization in Convex
+      - Large file processing efficiency
+      - Memory usage in document processing
+      - API rate limiting compliance
+  
+  - architecture: |
+      Ensure:
+      - Proper separation of concerns
+      - Consistent error handling patterns
+      - TypeScript type safety
+      - OKOA agent integration standards
+
+# Custom rules for financial software
+rules:
+  - name: "financial_precision"
+    description: "Ensure financial calculations use proper precision"
+    pattern: "parseFloat|parseInt"
+    severity: "warning"
+    message: "Consider using decimal.js or similar for financial calculations"
+  
+  - name: "sensitive_data"
+    description: "Check for potential sensitive data exposure"
+    pattern: "(password|secret|key|token)\\s*[:=]\\s*['\"][^'\"]*['\"]"
+    severity: "error"
+    message: "Potential sensitive data in code. Use environment variables."
+  
+  - name: "okoa_branding"
+    description: "Ensure OKOA branding consistency"
+    pattern: "OKOA|okoa"
+    severity: "info"
+    message: "Verify OKOA branding follows ASCII Visual Library standards"

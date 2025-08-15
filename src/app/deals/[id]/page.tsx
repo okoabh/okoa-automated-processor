@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import { InteractiveButton } from '@/components/ascii/InteractiveButton';
+import { FinancialAnalysis } from '@/components/deals/FinancialAnalysis';
 import Link from 'next/link';
 
 interface Document {
@@ -53,7 +54,7 @@ export default function DealPage() {
   const [currentMessage, setCurrentMessage] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const [isChatLoading, setIsChatLoading] = useState(false);
-  const [activeTab, setActiveTab] = useState<'documents' | 'chat'>('documents');
+  const [activeTab, setActiveTab] = useState<'documents' | 'financial' | 'chat'>('documents');
 
   useEffect(() => {
     if (dealId) {
@@ -190,6 +191,12 @@ export default function DealPage() {
             📄 DOCUMENTS ({totalDocs})
           </InteractiveButton>
           <InteractiveButton
+            onClick={() => setActiveTab('financial')}
+            variant={activeTab === 'financial' ? 'primary' : 'secondary'}
+          >
+            💰 FINANCIAL
+          </InteractiveButton>
+          <InteractiveButton
             onClick={() => setActiveTab('chat')}
             variant={activeTab === 'chat' ? 'primary' : 'secondary'}
           >
@@ -295,6 +302,35 @@ export default function DealPage() {
                 )}
               </div>
             </div>
+          </div>
+        )}
+
+        {/* Financial Tab */}
+        {activeTab === 'financial' && (
+          <div>
+            {/* Wolfgramm Deal Financial Data */}
+            {folder?.name.toLowerCase().includes('wolfgramm') ? (
+              <FinancialAnalysis 
+                dealData={{
+                  totalValue: 43800000, // As-is value from appraisal
+                  keyCount: 120,
+                  totalBudget: 74589341,
+                  spentAmount: 36298082,
+                  projectedValue: 78000000, // Stabilized value
+                  timeHorizon: 3 // Years to stabilization
+                }}
+              />
+            ) : (
+              <div className="bg-okoa-bg-secondary dark:bg-japanese-ink-sumi border-thin border-okoa-fg-primary dark:border-japanese-neutral-warm-gray p-8 text-center">
+                <div className="text-2xl mb-4">📊</div>
+                <h3 className="text-sm font-bold font-mono mb-2 text-okoa-fg-primary dark:text-japanese-paper-warm">
+                  FINANCIAL ANALYSIS
+                </h3>
+                <p className="text-xs text-okoa-fg-secondary dark:text-japanese-neutral-warm-gray font-mono">
+                  Financial analysis will be available once deal documents are processed
+                </p>
+              </div>
+            )}
           </div>
         )}
 
