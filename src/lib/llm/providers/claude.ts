@@ -17,7 +17,7 @@ export class ClaudeProvider {
   async processDocument(
     content: string,
     agentPrompt: string,
-    model: string = process.env.DEFAULT_CLAUDE_MODEL || 'claude-3-5-sonnet-20241022'
+    model: string = process.env.DEFAULT_CLAUDE_MODEL || 'claude-3-5-sonnet-latest'
   ) {
     const startTime = Date.now();
     
@@ -81,14 +81,14 @@ export class ClaudeProvider {
   
   private selectModelForDocumentType(documentType: string): string {
     const modelSelection: Record<string, string> = {
-      'real-estate': 'claude-3-5-sonnet-20241022', // Complex analysis
-      'financial': 'claude-3-5-sonnet-20241022',   // Mathematical reasoning
-      'legal': 'claude-3-5-sonnet-20241022',       // Detailed analysis
+      'real-estate': 'claude-3-5-sonnet-latest', // Complex analysis
+      'financial': 'claude-3-5-sonnet-latest',   // Mathematical reasoning
+      'legal': 'claude-3-5-sonnet-latest',       // Detailed analysis
       'simple': 'claude-3-5-haiku-20241022',       // Basic documents
-      'general': 'claude-3-5-sonnet-20241022',     // Default
+      'general': 'claude-3-5-sonnet-latest',     // Default
     };
     
-    return modelSelection[documentType] || 'claude-3-5-sonnet-20241022';
+    return modelSelection[documentType] || 'claude-3-5-sonnet-latest';
   }
   
   private buildAgentPrompt(agentContext: string, documentType: string): string {
@@ -115,7 +115,7 @@ export class ClaudeProvider {
   async estimateCost(
     content: string,
     agentContext: string,
-    model: string = 'claude-3-5-sonnet-20241022'
+    model: string = 'claude-3-5-sonnet-latest'
   ): Promise<number> {
     const estimatedTokens = await this.estimateTokens(content, agentContext);
     const modelConfig = CLAUDE_MODELS.find(m => m.id === model);
@@ -142,7 +142,7 @@ export class ClaudeProvider {
     temperature?: number;
     model?: string;
   }) {
-    const model = options.model || 'claude-3-5-sonnet-20241022';
+    const model = options.model || 'claude-3-5-sonnet-latest';
     const startTime = Date.now();
     
     try {

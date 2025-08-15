@@ -107,15 +107,15 @@ export function AISidebar({ isOpen, onToggle, dealId, dealName, context }: AISid
         className={`fixed right-0 top-0 h-full w-96 z-50 transform transition-transform duration-300 ease-in-out flex flex-col ${
           isOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
-        style={{backgroundColor: 'var(--bg-primary)', borderLeft: '2px solid var(--border-primary)'}}
+        style={{backgroundColor: 'var(--figma-cream-lightest)', borderLeft: '2px solid var(--figma-beige)'}}
       >
         {/* Header */}
-        <div className="terminal-header flex items-center justify-between p-4" style={{borderBottom: '1px solid var(--border-primary)'}}>
+        <div className="terminal-header flex items-center justify-between p-4" style={{borderBottom: '1px solid var(--figma-beige)', backgroundColor: 'var(--figma-cream-light)'}}>
           <div>
-            <div className="font-mono text-sm font-bold" style={{color: 'var(--text-primary)'}}>
+            <div className="font-mono text-sm font-bold" style={{color: 'var(--figma-text-dark)'}}>
               🤖 MIDNIGHT ATLAS PRISM
             </div>
-            <div className="font-mono text-xs" style={{color: 'var(--text-secondary)'}}>
+            <div className="font-mono text-xs" style={{color: 'var(--figma-gray-medium)'}}>
               Real Estate Analysis Agent v1.1
             </div>
           </div>
@@ -126,10 +126,10 @@ export function AISidebar({ isOpen, onToggle, dealId, dealName, context }: AISid
 
         {/* Agent Status */}
         {(isLoading || agentStatus) && (
-          <div className="p-3" style={{backgroundColor: 'var(--bg-secondary)', borderBottom: '1px solid var(--border-light)'}}>
+          <div className="p-3" style={{backgroundColor: 'var(--figma-cream)', borderBottom: '1px solid var(--figma-beige-light)'}}>
             <div className="flex items-center space-x-2">
               <div className="animate-spin text-sm">⚡</div>
-              <div className="font-mono text-xs" style={{color: 'var(--accent-primary)'}}>
+              <div className="font-mono text-xs" style={{color: 'var(--figma-brown-accent)'}}>
                 {agentStatus || "Processing your request..."}
               </div>
             </div>
@@ -138,11 +138,11 @@ export function AISidebar({ isOpen, onToggle, dealId, dealName, context }: AISid
 
         {/* Deal Context */}
         {dealName && (
-          <div className="p-3" style={{backgroundColor: 'var(--bg-tertiary)', borderBottom: '1px solid var(--border-light)'}}>
-            <div className="font-mono text-xs font-bold" style={{color: 'var(--text-primary)'}}>
+          <div className="p-3" style={{backgroundColor: 'var(--figma-cream)', borderBottom: '1px solid var(--figma-beige-light)'}}>
+            <div className="font-mono text-xs font-bold" style={{color: 'var(--figma-text-dark)'}}>
               ANALYZING: {dealName.toUpperCase()}
             </div>
-            <div className="font-mono text-xs" style={{color: 'var(--text-secondary)'}}>
+            <div className="font-mono text-xs" style={{color: 'var(--figma-gray-medium)'}}>
               Context loaded • Financial data • Market analysis • Risk metrics
             </div>
           </div>
@@ -153,22 +153,22 @@ export function AISidebar({ isOpen, onToggle, dealId, dealName, context }: AISid
           {chatMessages.length === 0 ? (
             <div className="text-center py-8">
               <div className="text-4xl mb-4">💬</div>
-              <div className="font-mono text-sm" style={{color: 'var(--text-secondary)'}}>
+              <div className="font-mono text-sm" style={{color: 'var(--figma-gray-medium)'}}>
                 Ask me about deal analysis, financial metrics, risk assessment, or market positioning.
               </div>
             </div>
           ) : (
             chatMessages.map((msg, idx) => (
               <div key={idx} className="space-y-2">
-                <div className="font-mono text-xs" style={{color: 'var(--text-muted)'}}>
+                <div className="font-mono text-xs" style={{color: 'var(--figma-gray)'}}>
                   {msg.type === 'user' ? '👤 YOU' : '🤖 MIDNIGHT ATLAS PRISM'}
                 </div>
                 <div 
                   className="p-3 font-mono text-sm rounded"
                   style={{
-                    backgroundColor: msg.type === 'user' ? 'var(--bg-hover)' : 'var(--bg-tertiary)',
-                    border: '1px solid var(--border-primary)',
-                    color: 'var(--text-primary)'
+                    backgroundColor: msg.type === 'user' ? 'var(--figma-beige-light)' : 'var(--figma-cream)',
+                    border: '1px solid var(--figma-beige)',
+                    color: 'var(--figma-text-dark)'
                   }}
                 >
                   {msg.content}
@@ -186,9 +186,9 @@ export function AISidebar({ isOpen, onToggle, dealId, dealName, context }: AISid
               <div 
                 className="p-3 font-mono text-sm rounded"
                 style={{
-                  backgroundColor: 'var(--bg-tertiary)',
-                  border: '1px solid var(--border-primary)',
-                  color: 'var(--text-primary)'
+                  backgroundColor: 'var(--figma-cream)',
+                  border: '1px solid var(--figma-beige)',
+                  color: 'var(--figma-text-dark)'
                 }}
               >
                 <div className="animate-pulse">
@@ -203,7 +203,7 @@ export function AISidebar({ isOpen, onToggle, dealId, dealName, context }: AISid
         </div>
 
         {/* Input */}
-        <div className="p-4" style={{borderTop: '1px solid var(--border-primary)'}}>
+        <div className="p-4" style={{borderTop: '1px solid var(--figma-beige)'}}>
           <div className="space-y-3">
             <div className="flex space-x-2">
               <input
@@ -214,9 +214,9 @@ export function AISidebar({ isOpen, onToggle, dealId, dealName, context }: AISid
                 placeholder="Ask about financial analysis, risks, opportunities..."
                 className="flex-1 p-2 font-mono text-sm border rounded focus:outline-none"
                 style={{
-                  backgroundColor: 'var(--bg-primary)',
-                  color: 'var(--text-primary)',
-                  borderColor: currentMessage.trim() ? 'var(--accent-primary)' : 'var(--border-primary)'
+                  backgroundColor: 'var(--figma-cream-lightest)',
+                  color: 'var(--figma-text-dark)',
+                  borderColor: currentMessage.trim() ? 'var(--figma-brown-accent)' : 'var(--figma-beige)'
                 }}
                 disabled={isLoading}
               />
@@ -243,9 +243,9 @@ export function AISidebar({ isOpen, onToggle, dealId, dealName, context }: AISid
                   onClick={() => setCurrentMessage(question)}
                   className="px-2 py-1 font-mono text-xs rounded border hover:opacity-80 transition-opacity"
                   style={{
-                    backgroundColor: 'var(--bg-secondary)',
-                    color: 'var(--text-secondary)',
-                    borderColor: 'var(--border-light)'
+                    backgroundColor: 'var(--figma-cream-light)',
+                    color: 'var(--figma-gray-medium)',
+                    borderColor: 'var(--figma-beige-light)'
                   }}
                   disabled={isLoading}
                 >
@@ -267,9 +267,9 @@ export function AIFloatingButton({ onClick }: { onClick: () => void }) {
       onClick={onClick}
       className="fixed bottom-6 right-6 z-30 p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105"
       style={{
-        backgroundColor: 'var(--accent-primary)',
-        color: 'var(--text-inverse)',
-        border: '2px solid var(--border-primary)'
+        backgroundColor: 'var(--figma-brown-accent)',
+        color: 'var(--figma-cream-lightest)',
+        border: '2px solid var(--figma-beige)'
       }}
     >
       <div className="flex items-center space-x-2">

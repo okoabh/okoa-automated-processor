@@ -69,7 +69,7 @@ export async function POST(request: NextRequest) {
       jobType: 'document_analysis',
       priority: 5, // Normal priority
       llmProvider: 'anthropic',
-      llmModel: process.env.DEFAULT_CLAUDE_MODEL || 'claude-3-5-sonnet-20241022',
+      llmModel: process.env.DEFAULT_CLAUDE_MODEL || 'claude-3-5-sonnet-20250113',
     });
     
     console.log(`Processing job created: ${jobId}`);

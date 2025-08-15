@@ -59,7 +59,7 @@ describe('/api/deals/[id]/chat API Route', () => {
     usage: { inputTokens: 100, outputTokens: 50, totalTokens: 150 },
     cost: 0.01,
     processingTime: 2000,
-    model: 'claude-3-5-sonnet-20241022',
+    model: 'claude-3-5-sonnet-latest',
     provider: 'anthropic' as const,
   }
 

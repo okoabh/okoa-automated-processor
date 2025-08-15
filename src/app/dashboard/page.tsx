@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import { CLAUDE_MODELS } from '../../types';
 
 export default function Dashboard() {
-  const [selectedModel, setSelectedModel] = useState('claude-3-5-sonnet-20241022');
+  const [selectedModel, setSelectedModel] = useState('claude-3-5-sonnet-latest');
   const [realTimeMetrics, setRealTimeMetrics] = useState({
     tokensUsed: 0,
     costAccrued: 0,

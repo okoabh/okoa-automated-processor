@@ -17,7 +17,7 @@ jest.mock('@anthropic-ai/sdk', () => {
 jest.mock('../../types', () => ({
   CLAUDE_MODELS: [
     {
-      id: 'claude-3-5-sonnet-20241022',
+      id: 'claude-3-5-sonnet-latest',
       name: 'Claude 3.5 Sonnet',
       costPer1KTokens: { input: 0.003, output: 0.015 },
       maxTokens: 200000
@@ -83,7 +83,7 @@ describe('ClaudeProvider', () => {
       })
 
       expect(mockCreate).toHaveBeenCalledWith({
-        model: 'claude-3-5-sonnet-20241022',
+        model: 'claude-3-5-sonnet-latest',
         max_tokens: 1000,
         temperature: 0.7,
         system: 'You are a helpful assistant',
@@ -104,7 +104,7 @@ describe('ClaudeProvider', () => {
         },
         cost: expect.any(Number),
         processingTime: expect.any(Number),
-        model: 'claude-3-5-sonnet-20241022',
+        model: 'claude-3-5-sonnet-latest',
         provider: 'anthropic'
       })
     })
@@ -155,7 +155,7 @@ describe('ClaudeProvider', () => {
         expect.objectContaining({
           max_tokens: 4000,
           temperature: 0.7,
-          model: 'claude-3-5-sonnet-20241022'
+          model: 'claude-3-5-sonnet-latest'
         })
       )
     })
@@ -178,7 +178,7 @@ describe('ClaudeProvider', () => {
       )
 
       expect(mockCreate).toHaveBeenCalledWith({
-        model: 'claude-3-5-sonnet-20241022',
+        model: 'claude-3-5-sonnet-latest',
         max_tokens: 4000,
         temperature: 0.1,
         messages: [{
@@ -210,7 +210,7 @@ describe('ClaudeProvider', () => {
 
       expect(mockCreate).toHaveBeenCalledWith(
         expect.objectContaining({
-          model: 'claude-3-5-sonnet-20241022'
+          model: 'claude-3-5-sonnet-latest'
         })
       )
     })
@@ -267,7 +267,7 @@ describe('ClaudeProvider', () => {
       const cost = await provider.estimateCost(
         'Test content',
         'Agent context',
-        'claude-3-5-sonnet-20241022'
+        'claude-3-5-sonnet-latest'
       )
 
       expect(cost).toBeGreaterThan(0)

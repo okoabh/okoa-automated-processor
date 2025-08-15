@@ -125,8 +125,18 @@ export const CLAUDE_MODELS: LLMModelConfig[] = [
   },
   {
     id: "claude-3-5-sonnet-20241022", 
-    name: "Claude 3.5 Sonnet",
-    description: "Balanced speed & quality - Recommended",
+    name: "Claude 3.5 Sonnet v1 (Deprecated)",
+    description: "DEPRECATED - Use v2 instead",
+    provider: "anthropic",
+    costPer1KTokens: { input: 3, output: 15 },
+    maxTokens: 200000,
+    speed: "Fast",
+    quality: "Excellent"
+  },
+  {
+    id: "claude-3-5-sonnet-latest", 
+    name: "Claude 3.5 Sonnet (Latest)",
+    description: "Latest Sonnet model - Balanced speed & quality",
     provider: "anthropic",
     costPer1KTokens: { input: 3, output: 15 },
     maxTokens: 200000,

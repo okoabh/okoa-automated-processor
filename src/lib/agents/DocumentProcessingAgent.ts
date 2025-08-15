@@ -197,7 +197,7 @@ Provide only the plain text extraction.
 
     try {
       const response = await this.anthropic.messages.create({
-        model: 'claude-3-5-sonnet-20241022',
+        model: 'claude-3-5-sonnet-latest',
         max_tokens: 8000,
         temperature: 0.1, // Very low for precision
         messages: [
@@ -255,7 +255,7 @@ Provide the complete YAML synthetic document.
 
     try {
       const response = await this.anthropic.messages.create({
-        model: 'claude-3-5-sonnet-20241022',
+        model: 'claude-3-5-sonnet-latest',
         max_tokens: 8000,
         temperature: 0.3, // Moderate temperature for analysis
         messages: [
