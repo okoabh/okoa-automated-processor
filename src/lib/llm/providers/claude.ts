@@ -135,6 +135,59 @@ export class ClaudeProvider {
     return CLAUDE_MODELS;
   }
   
+  async generateResponse(options: {
+    systemPrompt: string;
+    userPrompt: string;
+    maxTokens?: number;
+    temperature?: number;
+    model?: string;
+  }) {
+    const model = options.model || 'claude-3-5-sonnet-20241022';
+    const startTime = Date.now();
+    
+    try {
+      const response = await this.client.messages.create({
+        model,
+        max_tokens: options.maxTokens || 4000,
+        temperature: options.temperature || 0.7,
+        system: options.systemPrompt,
+        messages: [
+          {
+            role: 'user',
+            content: options.userPrompt,
+          },
+        ],
+      });
+      
+      const processingTime = Date.now() - startTime;
+      const inputTokens = response.usage.input_tokens;
+      const outputTokens = response.usage.output_tokens;
+      const totalTokens = inputTokens + outputTokens;
+      
+      // Calculate cost based on model
+      const modelConfig = CLAUDE_MODELS.find(m => m.id === model);
+      const cost = modelConfig 
+        ? (inputTokens * modelConfig.costPer1KTokens.input + outputTokens * modelConfig.costPer1KTokens.output) / 1000
+        : 0;
+      
+      return {
+        content: response.content[0].type === 'text' ? response.content[0].text : '',
+        usage: {
+          inputTokens,
+          outputTokens,
+          totalTokens,
+        },
+        cost,
+        processingTime,
+        model,
+        provider: 'anthropic' as const,
+      };
+    } catch (error) {
+      console.error('Claude API error:', error);
+      throw new Error(`Claude processing failed: ${error instanceof Error ? error.message : 'Unknown error'}`);
+    }
+  }
+
   async checkAvailability(): Promise<boolean> {
     try {
       // Simple test request to verify API availability
