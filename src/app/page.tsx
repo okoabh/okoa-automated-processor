@@ -1,171 +1,289 @@
 "use client";
 
 import Link from 'next/link';
-import { InteractiveButton } from '@/components/ascii/InteractiveButton';
-import { CreateFolderModal } from '@/components/deals/CreateFolderModal';
-import { ThemeToggle } from '@/components/ThemeToggle';
 import { useState } from 'react';
 
 export default function Home() {
   const [showCreateFolder, setShowCreateFolder] = useState(false);
 
   return (
-    <div className="min-h-screen font-mono" style={{backgroundColor: 'var(--figma-cream-lightest)', color: 'var(--figma-text-dark)'}}>
-      <div className="max-w-5xl mx-auto px-6 py-8">
+    <div style={{
+      minHeight: '100vh',
+      backgroundColor: '#faf9f7',
+      color: '#2d2d2d',
+      fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif'
+    }}>
+      <div style={{
+        maxWidth: '1200px',
+        margin: '0 auto',
+        padding: '0 2rem'
+      }}>
         
-        {/* Theme Toggle - Top Right */}
-        <div className="flex justify-end mb-6">
-          <ThemeToggle />
-        </div>
-
         {/* Header */}
-        <div className="text-center mb-12">
-          <div className="terminal-content p-8 mb-6">
-            <div className="font-mono text-lg font-bold leading-tight whitespace-pre text-center">
-{`██████╗ ██╗  ██╗ ██████╗  █████╗ 
-██╔═══██╗██║ ██╔╝██╔═══██╗██╔══██╗
-██║   ██║█████╔╝ ██║   ██║███████║
-██║   ██║██╔═██╗ ██║   ██║██╔══██║
-╚██████╔╝██║  ██╗╚██████╔╝██║  ██║
- ╚═════╝ ╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═╝
-
-AUTOMATED DOCUMENT PROCESSING SYSTEM`}
-            </div>
-          </div>
-          <h1 className="text-xl font-bold font-mono mb-4 tracking-wide" style={{color: 'var(--figma-text-dark)'}}>
-            INSTITUTIONAL-GRADE DOCUMENT PROCESSOR
+        <header style={{
+          paddingTop: '4rem',
+          paddingBottom: '4rem',
+          textAlign: 'center',
+          borderBottom: '1px solid #ede9e3'
+        }}>
+          <h1 style={{
+            fontSize: '3rem',
+            fontWeight: '300',
+            letterSpacing: '-0.02em',
+            margin: '0',
+            marginBottom: '1rem'
+          }}>
+            OKOA
           </h1>
-          <p className="text-sm font-mono max-w-xl mx-auto" style={{color: 'var(--figma-gray-medium)'}}>
-            Multi-agent AI processing • Real estate analysis • Structured synthesis
+          <p style={{
+            fontSize: '1.25rem',
+            fontWeight: '400',
+            color: '#4a4a4a',
+            margin: '0',
+            maxWidth: '600px',
+            marginLeft: 'auto',
+            marginRight: 'auto'
+          }}>
+            Institutional-grade document processing with multi-agent AI analysis
           </p>
-        </div>
+        </header>
 
-        {/* Quick Access - Wolfgramm Deal */}
-        <div className="mb-8">
-          <div className="terminal-content p-4 text-center" style={{backgroundColor: 'var(--figma-cream)', color: 'var(--figma-text-dark)', border: '1px solid var(--figma-beige)'}}>
-            <div className="text-lg mb-2">🎯</div>
-            <h3 className="text-sm font-bold font-mono mb-2">WOLFGRAMM ASCENT WALDORF DEAL</h3>
-            <p className="text-xs font-mono mb-3" style={{color: 'var(--figma-gray-medium)'}}>
+        {/* Featured Deal */}
+        <section style={{
+          padding: '4rem 0',
+          borderBottom: '1px solid #ede9e3'
+        }}>
+          <div style={{
+            backgroundColor: '#f5f4f2',
+            border: '1px solid #ede9e3',
+            borderRadius: '8px',
+            padding: '2rem',
+            textAlign: 'center'
+          }}>
+            <h2 style={{
+              fontSize: '1.5rem',
+              fontWeight: '400',
+              margin: '0',
+              marginBottom: '1rem'
+            }}>
+              Wolfgramm Ascent Waldorf Deal
+            </h2>
+            <p style={{
+              color: '#6b6b6b',
+              margin: '0',
+              marginBottom: '2rem'
+            }}>
               Park City hospitality development • $43.8M valuation • AI analysis ready
             </p>
-            <Link href="/deals/k576qtmmvp4594zdvqp3qttx0d7np0m1">
-              <InteractiveButton variant="secondary" size="sm">
-                ANALYZE DEAL →
-              </InteractiveButton>
+            <Link 
+              href="/deals/k576qtmmvp4594zdvqp3qttx0d7np0m1"
+              style={{
+                display: 'inline-block',
+                backgroundColor: '#8b4513',
+                color: 'white',
+                padding: '0.75rem 2rem',
+                textDecoration: 'none',
+                borderRadius: '4px',
+                fontSize: '0.875rem',
+                fontWeight: '500',
+                transition: 'all 0.2s ease',
+                cursor: 'pointer'
+              }}
+              onMouseOver={(e) => {
+                e.currentTarget.style.backgroundColor = '#6d3410';
+              }}
+              onMouseOut={(e) => {
+                e.currentTarget.style.backgroundColor = '#8b4513';
+              }}
+            >
+              Analyze Deal →
             </Link>
           </div>
-        </div>
+        </section>
 
         {/* Main Actions */}
-        <div style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px', marginBottom: '64px'}}>
-          <div className="terminal-content p-8 text-center" style={{backgroundColor: 'var(--figma-cream-light)', border: '1px solid var(--figma-beige)'}}>
-            <div className="text-3xl mb-4">📁</div>
-            <h2 className="text-sm font-bold font-mono mb-3" style={{color: 'var(--figma-text-dark)'}}>CREATE FOLDER</h2>
-            <p className="text-xs font-mono mb-6" style={{color: 'var(--figma-gray-medium)'}}>
-              Create a new folder in Box.com for document storage and processing
-            </p>
-            <div style={{width: '100%'}}>
-              <InteractiveButton 
+        <section style={{ padding: '4rem 0' }}>
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
+            gap: '2rem'
+          }}>
+            <div style={{
+              backgroundColor: '#f5f4f2',
+              border: '1px solid #ede9e3',
+              borderRadius: '8px',
+              padding: '2rem',
+              textAlign: 'center'
+            }}>
+              <h3 style={{
+                fontSize: '1.25rem',
+                fontWeight: '400',
+                margin: '0',
+                marginBottom: '1rem'
+              }}>
+                Create Folder
+              </h3>
+              <p style={{
+                color: '#6b6b6b',
+                margin: '0',
+                marginBottom: '2rem',
+                lineHeight: '1.6'
+              }}>
+                Create a new folder in Box.com for document storage and processing
+              </p>
+              <button
                 onClick={() => setShowCreateFolder(true)}
-                variant="primary"
+                style={{
+                  width: '100%',
+                  backgroundColor: 'transparent',
+                  color: '#8b4513',
+                  padding: '0.75rem 2rem',
+                  border: '2px solid #8b4513',
+                  borderRadius: '4px',
+                  fontSize: '0.875rem',
+                  fontWeight: '500',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s ease'
+                }}
+                onMouseOver={(e) => {
+                  e.currentTarget.style.backgroundColor = '#8b4513';
+                  e.currentTarget.style.color = 'white';
+                }}
+                onMouseOut={(e) => {
+                  e.currentTarget.style.backgroundColor = 'transparent';
+                  e.currentTarget.style.color = '#8b4513';
+                }}
               >
-                CREATE NEW FOLDER
-              </InteractiveButton>
+                Create New Folder
+              </button>
             </div>
-          </div>
 
-          <div className="terminal-content p-8 text-center" style={{backgroundColor: 'var(--figma-cream-light)', border: '1px solid var(--figma-beige)'}}>
-            <div className="text-3xl mb-4">📄</div>
-            <h2 className="text-sm font-bold font-mono mb-3" style={{color: 'var(--figma-text-dark)'}}>MANAGE FOLDERS</h2>
-            <p className="text-xs font-mono mb-6" style={{color: 'var(--figma-gray-medium)'}}>
-              View existing folders and upload documents for processing
-            </p>
-            <div style={{width: '100%'}}>
-              <Link href="/folders">
-                <InteractiveButton variant="primary">
-                  VIEW ALL FOLDERS
-                </InteractiveButton>
+            <div style={{
+              backgroundColor: '#f5f4f2',
+              border: '1px solid #ede9e3',
+              borderRadius: '8px',
+              padding: '2rem',
+              textAlign: 'center'
+            }}>
+              <h3 style={{
+                fontSize: '1.25rem',
+                fontWeight: '400',
+                margin: '0',
+                marginBottom: '1rem'
+              }}>
+                Manage Folders
+              </h3>
+              <p style={{
+                color: '#6b6b6b',
+                margin: '0',
+                marginBottom: '2rem',
+                lineHeight: '1.6'
+              }}>
+                View existing folders and upload documents for processing
+              </p>
+              <Link 
+                href="/folders"
+                style={{
+                  display: 'block',
+                  width: '100%',
+                  backgroundColor: 'transparent',
+                  color: '#8b4513',
+                  padding: '0.75rem 2rem',
+                  border: '2px solid #8b4513',
+                  borderRadius: '4px',
+                  fontSize: '0.875rem',
+                  fontWeight: '500',
+                  textDecoration: 'none',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s ease',
+                  boxSizing: 'border-box'
+                }}
+                onMouseOver={(e) => {
+                  e.currentTarget.style.backgroundColor = '#8b4513';
+                  e.currentTarget.style.color = 'white';
+                }}
+                onMouseOut={(e) => {
+                  e.currentTarget.style.backgroundColor = 'transparent';
+                  e.currentTarget.style.color = '#8b4513';
+                }}
+              >
+                View All Folders
               </Link>
             </div>
           </div>
-        </div>
+        </section>
 
-        {/* Integrations Guide */}
-        <div className="mb-16">
-          <div className="terminal-content p-8 text-center" style={{backgroundColor: 'var(--figma-cream)', borderColor: 'var(--figma-brown-accent)', borderWidth: '2px'}}>
-            <div className="text-3xl mb-4">🔧</div>
-            <h2 className="text-sm font-bold font-mono mb-3" style={{color: 'var(--figma-text-dark)'}}>INTEGRATION GUIDE</h2>
-            <p className="text-xs font-mono mb-6" style={{color: 'var(--figma-gray-medium)'}}>
-              Connect Fireflies.ai, Slack, and Box.com • Step-by-step setup instructions • Workflow examples
+        {/* Integration Guide */}
+        <section style={{
+          padding: '4rem 0',
+          borderTop: '1px solid #ede9e3'
+        }}>
+          <div style={{
+            backgroundColor: '#f5f4f2',
+            border: '1px solid #ede9e3',
+            borderRadius: '8px',
+            padding: '2rem',
+            textAlign: 'center'
+          }}>
+            <h2 style={{
+              fontSize: '1.5rem',
+              fontWeight: '400',
+              margin: '0',
+              marginBottom: '1rem'
+            }}>
+              Integration Guide
+            </h2>
+            <p style={{
+              color: '#6b6b6b',
+              margin: '0',
+              marginBottom: '2rem'
+            }}>
+              Connect Fireflies.ai, Slack, and Box.com with step-by-step setup instructions
             </p>
-            <Link href="/integrations">
-              <InteractiveButton variant="primary">
-                VIEW SETUP GUIDE →
-              </InteractiveButton>
+            <Link 
+              href="/integrations"
+              style={{
+                display: 'inline-block',
+                backgroundColor: 'transparent',
+                color: '#8b4513',
+                padding: '0.75rem 2rem',
+                border: '2px solid #8b4513',
+                borderRadius: '4px',
+                fontSize: '0.875rem',
+                fontWeight: '500',
+                textDecoration: 'none',
+                cursor: 'pointer',
+                transition: 'all 0.2s ease'
+              }}
+              onMouseOver={(e) => {
+                e.currentTarget.style.backgroundColor = '#8b4513';
+                e.currentTarget.style.color = 'white';
+              }}
+              onMouseOut={(e) => {
+                e.currentTarget.style.backgroundColor = 'transparent';
+                e.currentTarget.style.color = '#8b4513';
+              }}
+            >
+              View Setup Guide →
             </Link>
           </div>
-        </div>
-
-        {/* How it Works */}
-        <div className="terminal-content p-8" style={{backgroundColor: 'var(--figma-cream)', color: 'var(--figma-text-dark)', border: '1px solid var(--figma-beige)'}}>
-          <h2 className="text-sm font-bold font-mono mb-6 text-center">
-            ═══ PROCESSING WORKFLOW ═══
-          </h2>
-          <div className="font-mono text-xs leading-normal">
-            <div style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '16px', textAlign: 'center'}}>
-              <div className="p-4" style={{border: '1px solid var(--figma-beige)', backgroundColor: 'var(--figma-cream-light)'}}>
-                <div className="mb-3 text-2xl">📁</div>
-                <div className="font-bold text-sm mb-2">CREATE FOLDER</div>
-                <div className="text-xs" style={{color: 'var(--figma-gray-medium)'}}>
-                  Box.com workspace setup
-                </div>
-              </div>
-              <div className="p-4" style={{border: '1px solid var(--figma-beige)', backgroundColor: 'var(--figma-cream-light)'}}>
-                <div className="mb-3 text-2xl">⚡</div>
-                <div className="font-bold text-sm mb-2">AI PROCESSING</div>
-                <div className="text-xs" style={{color: 'var(--figma-gray-medium)'}}>
-                  Multi-agent analysis pipeline
-                </div>
-              </div>
-              <div className="p-4" style={{border: '1px solid var(--figma-beige)', backgroundColor: 'var(--figma-cream-light)'}}>
-                <div className="mb-3 text-2xl">📊</div>
-                <div className="font-bold text-sm mb-2">STRUCTURED OUTPUT</div>
-                <div className="text-xs" style={{color: 'var(--figma-gray-medium)'}}>
-                  Institutional-grade reports
-                </div>
-              </div>
-            </div>
-            <div className="mt-6 text-center">
-              <div className="text-xs font-mono">
-                <span style={{color: 'var(--figma-brown-accent)'}}>UPLOAD</span>
-                <span className="mx-2">→</span>
-                <span style={{color: 'var(--figma-brown-accent)'}}>OCR</span>
-                <span className="mx-2">→</span>
-                <span style={{color: 'var(--figma-brown-accent)'}}>CLASSIFY</span>
-                <span className="mx-2">→</span>
-                <span style={{color: 'var(--figma-brown-accent)'}}>ANALYZE</span>
-                <span className="mx-2">→</span>
-                <span style={{color: 'var(--figma-brown-accent)'}}>SYNTHESIZE</span>
-              </div>
-            </div>
-          </div>
-        </div>
+        </section>
 
         {/* Footer */}
-        <div className="text-center mt-12 pt-6" style={{borderTop: '1px solid var(--figma-beige)'}}>
-          <p className="text-xs font-mono" style={{color: 'var(--figma-gray)'}}>
-            OKOA CAPITAL LLC • 2025 • OKOA LABS ENHANCED EDITION
+        <footer style={{
+          padding: '2rem 0',
+          textAlign: 'center',
+          borderTop: '1px solid #ede9e3',
+          marginTop: '4rem'
+        }}>
+          <p style={{
+            color: '#8b8680',
+            margin: '0',
+            fontSize: '0.875rem'
+          }}>
+            OKOA Capital LLC • 2025 • Enhanced Edition
           </p>
-        </div>
-
-        {/* Create Folder Modal */}
-        <CreateFolderModal 
-          isOpen={showCreateFolder}
-          onClose={() => setShowCreateFolder(false)}
-          onFolderCreated={(folderId, folderName) => {
-            console.log('Folder created:', folderName);
-          }}
-        />
+        </footer>
       </div>
     </div>
   );
