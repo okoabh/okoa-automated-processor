@@ -1,26 +1,176 @@
 @import "tailwindcss";
 
+/* OKOA ASCII Terminal v5.0 - Complete Professional Color System */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Complete 15-Color Professional Palette - Light Theme */
+  --color-white: #ffffff;
+  --color-gray-50: #f8f9fa;
+  --color-gray-100: #f1f3f4;
+  --color-gray-200: #e9ecef;
+  --color-gray-300: #dee2e6;
+  --color-gray-400: #ced4da;
+  --color-gray-500: #adb5bd;
+  --color-gray-600: #868e96;
+  --color-gray-700: #495057;
+  --color-gray-800: #343a40;
+  --color-gray-900: #212529;
+  --color-blue-500: #0066cc;
+  --color-blue-600: #0052a3;
+  --color-green-500: #28a745;
+  --color-red-500: #dc3545;
+  
+  /* Semantic Color Mapping */
+  --bg-primary: var(--color-white);
+  --bg-secondary: var(--color-gray-50);
+  --bg-tertiary: var(--color-gray-100);
+  --bg-code: var(--color-gray-50);
+  --bg-card: var(--color-white);
+  --bg-hover: var(--color-gray-100);
+  --border-light: var(--color-gray-200);
+  --border-primary: var(--color-gray-300);
+  --border-secondary: var(--color-gray-400);
+  --text-primary: var(--color-gray-900);
+  --text-secondary: var(--color-gray-700);
+  --text-muted: var(--color-gray-600);
+  --text-inverse: var(--color-white);
+  --accent-primary: var(--color-blue-500);
+  --accent-hover: var(--color-blue-600);
+  --success: var(--color-green-500);
+  --error: var(--color-red-500);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+.dark {
+  /* Complete 15-Color Professional Palette - Dark Theme */
+  --color-black: #000000;
+  --color-dark-900: #0d1117;
+  --color-dark-800: #161b22;
+  --color-dark-700: #21262d;
+  --color-dark-600: #30363d;
+  --color-dark-500: #484f58;
+  --color-dark-400: #6e7681;
+  --color-dark-300: #8b949e;
+  --color-dark-200: #b1bac4;
+  --color-dark-100: #c9d1d9;
+  --color-light-900: #f0f6fc;
+  --color-blue-dark: #58a6ff;
+  --color-blue-light: #79c0ff;
+  --color-green-dark: #56d364;
+  --color-red-dark: #f85149;
+  
+  /* Semantic Color Mapping */
+  --bg-primary: var(--color-black);
+  --bg-secondary: var(--color-dark-900);
+  --bg-tertiary: var(--color-dark-800);
+  --bg-code: var(--color-dark-800);
+  --bg-card: var(--color-dark-900);
+  --bg-hover: var(--color-dark-700);
+  --border-light: var(--color-dark-600);
+  --border-primary: var(--color-dark-500);
+  --border-secondary: var(--color-dark-400);
+  --text-primary: var(--color-light-900);
+  --text-secondary: var(--color-dark-100);
+  --text-muted: var(--color-dark-200);
+  --text-inverse: var(--color-dark-900);
+  --accent-primary: var(--color-blue-dark);
+  --accent-hover: var(--color-blue-light);
+  --success: var(--color-green-dark);
+  --error: var(--color-red-dark);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Perfect Monospace Typography Stack */
+* {
+  font-family: ui-monospace, 'SF Mono', 'Monaco', 'Cascadia Code', 'Roboto Mono', Consolas, 'Liberation Mono', Menlo, 'Courier New', monospace !important;
+  font-feature-settings: "liga" 0, "calt" 0;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0;
+}
+
+html {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+html {
+  background-color: var(--bg-primary);
+  min-height: 100vh;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: ui-monospace, 'SF Mono', 'Monaco', 'Cascadia Code', 'Roboto Mono', Consolas, 'Liberation Mono', Menlo, 'Courier New', monospace !important;
+  font-size: 14px;
+  line-height: 1.5;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* Terminal-style Components */
+.terminal-header {
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-primary);
+  padding: 12px 16px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.terminal-content {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-primary);
+  font-family: ui-monospace, 'SF Mono', 'Monaco', 'Cascadia Code', 'Roboto Mono', Consolas, 'Liberation Mono', Menlo, 'Courier New', monospace !important;
+}
+
+/* Form Elements */
+input, textarea, select, button {
+  font-family: ui-monospace, 'SF Mono', 'Monaco', 'Cascadia Code', 'Roboto Mono', Consolas, 'Liberation Mono', Menlo, 'Courier New', monospace !important;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Code Blocks */
+pre, code {
+  font-family: ui-monospace, 'SF Mono', 'Monaco', 'Cascadia Code', 'Roboto Mono', Consolas, 'Liberation Mono', Menlo, 'Courier New', monospace !important;
+  background: var(--bg-code);
+  border: 1px solid var(--border-secondary);
+}
+
+/* Clean Professional Buttons */
+.btn-primary {
+  background: var(--text-primary);
+  color: var(--bg-primary);
+  border: 1px solid var(--text-primary);
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.btn-secondary {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-primary);
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+/* Grid System */
+.grid-container {
+  display: grid;
+  gap: 1px;
+  background: var(--border-primary);
+  border: 1px solid var(--border-primary);
+}
+
+.grid-item {
+  background: var(--bg-primary);
+  padding: 16px;
 }

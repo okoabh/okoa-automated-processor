@@ -21,12 +21,22 @@ export const create = mutation({
     fileHash: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
-    const documentId = await ctx.db.insert("documents", {
-      ...args,
+    // Map args to schema fields
+    const documentData = {
+      filename: args.filename || args.fileName,
+      originalFilename: args.originalFilename || args.fileName,
+      filePath: args.filePath || `/uploads/${args.fileName}`,
+      fileSize: args.fileSize,
       status: args.status || "UPLOADED",
       createdAt: Date.now(),
-    });
+      dealId: args.dealId,
+      boxFileId: args.boxFileId,
+      mimeType: args.mimeType,
+      fileHash: args.fileHash,
+      metadata: args.metadata,
+    };
     
+    const documentId = await ctx.db.insert("documents", documentData);
     return documentId;
   },
 });

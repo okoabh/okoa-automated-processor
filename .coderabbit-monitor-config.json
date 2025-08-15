@@ -1,0 +1,33 @@
+{
+  "autoFixEnabled": true,
+  "safetyFilters": {
+    "allowSecurityFixes": true,
+    "allowBugFixes": true,
+    "allowStyleFixes": true,
+    "allowPerformanceFixes": true,
+    "blockCoreLogicChanges": true,
+    "blockSecurityConfigChanges": true,
+    "blockDeploymentChanges": true,
+    "requireReviewFor": [
+      "authentication",
+      "authorization", 
+      "payment",
+      "encryption",
+      "deployment",
+      "ci/cd"
+    ]
+  },
+  "autoCommit": true,
+  "autoCommitMessage": "🤖 Auto-fix CodeRabbit suggestions\n\n{suggestions}\n\n✅ Automated by Claude Code",
+  "notificationSettings": {
+    "onSuccess": true,
+    "onFailure": true,
+    "onSkipped": true
+  },
+  "claudeInstructions": {
+    "priority": "safety_first",
+    "approach": "conservative",
+    "testingRequired": true,
+    "documentChanges": true
+  }
+}

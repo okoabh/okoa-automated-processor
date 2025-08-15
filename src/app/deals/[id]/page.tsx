@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import { InteractiveButton } from '@/components/ascii/InteractiveButton';
 import { FinancialAnalysis } from '@/components/deals/FinancialAnalysis';
+import { TranscriptUpload } from '@/components/deals/TranscriptUpload';
 import Link from 'next/link';
 
 interface Document {
@@ -54,7 +55,7 @@ export default function DealPage() {
   const [currentMessage, setCurrentMessage] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const [isChatLoading, setIsChatLoading] = useState(false);
-  const [activeTab, setActiveTab] = useState<'documents' | 'financial' | 'chat'>('documents');
+  const [activeTab, setActiveTab] = useState<'documents' | 'financial' | 'chat' | 'transcripts'>('documents');
 
   useEffect(() => {
     if (dealId) {
@@ -125,7 +126,7 @@ export default function DealPage() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-okoa-bg-primary text-okoa-fg-primary font-mono">
+      <div className="min-h-screen font-mono" style={{backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)'}}>
         <div className="max-w-6xl mx-auto px-6 py-12">
           <div className="text-center">
             <div className="text-sm font-mono">LOADING DEAL DATA...</div>
@@ -137,10 +138,10 @@ export default function DealPage() {
 
   if (!folder) {
     return (
-      <div className="min-h-screen bg-okoa-bg-primary text-okoa-fg-primary font-mono">
+      <div className="min-h-screen font-mono" style={{backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)'}}>
         <div className="max-w-6xl mx-auto px-6 py-12">
           <div className="text-center">
-            <div className="text-sm font-mono text-okoa-fg-primary mb-4">DEAL NOT FOUND</div>
+            <div className="text-sm font-mono mb-4">DEAL NOT FOUND</div>
             <Link href="/folders">
               <InteractiveButton variant="secondary">
                 ← BACK TO FOLDERS
@@ -157,17 +158,17 @@ export default function DealPage() {
                    documents.synthdoc.length;
 
   return (
-    <div className="min-h-screen bg-okoa-bg-primary text-okoa-fg-primary font-mono">
+    <div className="min-h-screen font-mono" style={{backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)'}}>
       <div className="max-w-6xl mx-auto px-6 py-12">
         
         {/* Header */}
-        <div className="border-b border-okoa-fg-secondary pb-6 mb-8">
+        <div className="pb-6 mb-8" style={{borderBottom: '1px solid var(--border-secondary)'}}>
           <div className="flex items-center justify-between">
             <div>
               <h1 className="text-xl font-bold font-mono mb-2">
                 📁 {folder.name.toUpperCase()}
               </h1>
-              <p className="text-sm text-okoa-fg-secondary font-mono">
+              <p className="text-sm font-mono" style={{color: 'var(--text-secondary)'}}>
                 Deal documents and AI analysis interface
               </p>
             </div>
@@ -201,6 +202,12 @@ export default function DealPage() {
             variant={activeTab === 'chat' ? 'primary' : 'secondary'}
           >
             🤖 AI ANALYSIS
+          </InteractiveButton>
+          <InteractiveButton
+            onClick={() => setActiveTab('transcripts')}
+            variant={activeTab === 'transcripts' ? 'primary' : 'secondary'}
+          >
+            📞 TRANSCRIPTS
           </InteractiveButton>
         </div>
 
@@ -339,19 +346,24 @@ export default function DealPage() {
           <div className="max-w-4xl mx-auto">
             
             {/* Agent Header */}
-            <div className="bg-japanese-ink-sumi text-japanese-ink-light border-thin border-japanese-ink-sumi p-4 mb-6">
+            <div className="terminal-header p-4 mb-6" style={{backgroundColor: 'var(--bg-tertiary)', color: 'var(--text-primary)'}}>
               <div className="font-mono text-sm text-center">
                 🤖 MIDNIGHT ATLAS PRISM v1.1 - REAL ESTATE ANALYSIS AGENT
               </div>
-              <div className="text-xs text-japanese-neutral-warm-gray text-center mt-2">
+              <div className="text-xs text-center mt-2" style={{color: 'var(--text-muted)'}}>
                 Institutional-grade real estate analysis • Financial modeling • Risk assessment
               </div>
+              {isChatLoading && (
+                <div className="text-xs text-center mt-2 animate-pulse" style={{color: 'var(--accent-primary)'}}>
+                  ⚡ I'm analyzing the documents and formulating a response...
+                </div>
+              )}
             </div>
 
             {/* Chat Messages */}
-            <div className="bg-okoa-bg-secondary border-thin border-okoa-fg-primary p-4 mb-4 min-h-[400px] max-h-[500px] overflow-y-auto">
+            <div className="terminal-content p-4 mb-4 min-h-[400px] max-h-[500px] overflow-y-auto">
               {chatMessages.length === 0 ? (
-                <div className="text-center text-okoa-fg-secondary font-mono text-sm py-8">
+                <div className="text-center font-mono text-sm py-8" style={{color: 'var(--text-secondary)'}}>
                   <div className="mb-4">💬</div>
                   <div>Start a conversation with the AI agent</div>
                   <div className="text-xs mt-2">Ask about document analysis, risk assessment, financial modeling, or deal structure</div>
@@ -359,7 +371,11 @@ export default function DealPage() {
               ) : (
                 <div className="space-y-4">
                   {chatMessages.map((msg, idx) => (
-                    <div key={idx} className={`p-3 ${msg.type === 'user' ? 'bg-okoa-bg-primary text-okoa-fg-primary' : 'bg-japanese-ink-sumi text-japanese-ink-light'} border border-okoa-fg-secondary border-opacity-30`}>
+                    <div key={idx} className="p-3" style={{
+                      backgroundColor: msg.type === 'user' ? 'var(--bg-hover)' : 'var(--bg-tertiary)',
+                      color: 'var(--text-primary)',
+                      border: '1px solid var(--border-primary)'
+                    }}>
                       <div className="text-xs font-mono mb-1 opacity-70">
                         {msg.type === 'user' ? '👤 USER' : '🤖 MIDNIGHT ATLAS PRISM'}
                       </div>
@@ -369,9 +385,17 @@ export default function DealPage() {
                     </div>
                   ))}
                   {isChatLoading && (
-                    <div className="p-3 bg-japanese-ink-sumi text-japanese-ink-light border border-okoa-fg-secondary border-opacity-30">
+                    <div className="p-3" style={{
+                      backgroundColor: 'var(--bg-tertiary)',
+                      color: 'var(--text-primary)',
+                      border: '1px solid var(--border-primary)'
+                    }}>
                       <div className="text-xs font-mono mb-1 opacity-70">🤖 MIDNIGHT ATLAS PRISM</div>
-                      <div className="text-sm font-mono animate-pulse">Analyzing...</div>
+                      <div className="text-sm font-mono">
+                        <span className="animate-pulse">⚡ I'm thinking about your question...</span>
+                        <br />
+                        <span className="text-xs opacity-60">Accessing deal documents • Running analysis • Calculating risk metrics</span>
+                      </div>
                     </div>
                   )}
                 </div>
@@ -379,7 +403,7 @@ export default function DealPage() {
             </div>
 
             {/* Chat Input */}
-            <div className="bg-okoa-bg-secondary border-thin border-okoa-fg-primary p-4">
+            <div className="terminal-content p-4">
               <div className="flex space-x-2">
                 <input
                   type="text"
@@ -387,7 +411,13 @@ export default function DealPage() {
                   onChange={(e) => setCurrentMessage(e.target.value)}
                   onKeyPress={(e) => e.key === 'Enter' && sendChatMessage()}
                   placeholder="Ask about the deal documents, financial analysis, risk factors..."
-                  className="flex-1 p-3 border-thin border-okoa-fg-primary bg-okoa-bg-primary text-okoa-fg-primary font-mono text-sm focus:outline-none focus:border-okoa-interactive-primary"
+                  className="flex-1 p-3 font-mono text-sm focus:outline-none"
+                  style={{
+                    backgroundColor: 'var(--bg-primary)',
+                    color: 'var(--text-primary)',
+                    border: '1px solid var(--border-primary)',
+                    borderColor: currentMessage.trim() ? 'var(--accent-primary)' : 'var(--border-primary)'
+                  }}
                   disabled={isChatLoading}
                 />
                 <InteractiveButton
@@ -395,10 +425,20 @@ export default function DealPage() {
                   variant="primary"
                   disabled={!currentMessage.trim() || isChatLoading}
                 >
-                  {isChatLoading ? 'ANALYZING...' : 'SEND →'}
+                  {isChatLoading ? '⚡ ANALYZING...' : 'SEND →'}
                 </InteractiveButton>
               </div>
             </div>
+          </div>
+        )}
+
+        {/* Transcripts Tab */}
+        {activeTab === 'transcripts' && (
+          <div>
+            <TranscriptUpload 
+              dealId={dealId} 
+              dealName={folder?.name || 'Unknown Deal'} 
+            />
           </div>
         )}
       </div>

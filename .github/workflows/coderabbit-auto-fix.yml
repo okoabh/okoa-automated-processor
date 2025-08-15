@@ -1,0 +1,53 @@
+name: CodeRabbit Auto-Fix Workflow
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+  issue_comment:
+    types: [created]
+
+jobs:
+  detect-coderabbit-review:
+    runs-on: ubuntu-latest
+    if: contains(github.event.comment.body, '@coderabbitai') || github.event.pull_request
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+          
+      - name: Monitor CodeRabbit Comments
+        uses: actions/github-script@v7
+        with:
+          script: |
+            // This triggers Claude Code to check for CodeRabbit reviews
+            console.log('🤖 CodeRabbit review detected - notifying Claude Code system');
+            
+            const fs = require('fs');
+            const prNumber = context.payload.pull_request?.number || 
+                           context.payload.issue?.number;
+                           
+            if (prNumber) {
+              // Create trigger file for Claude monitoring
+              const triggerData = {
+                pr: prNumber,
+                timestamp: Date.now(),
+                event: 'coderabbit_review',
+                repository: context.repo.repo
+              };
+              
+              fs.writeFileSync('.coderabbit-trigger.json', JSON.stringify(triggerData, null, 2));
+              console.log(`📝 Created trigger file for PR #${prNumber}`);
+            }
+            
+      - name: Commit Trigger File
+        run: |
+          if [ -f .coderabbit-trigger.json ]; then
+            git config --local user.email "action@github.com"
+            git config --local user.name "GitHub Action"
+            git add .coderabbit-trigger.json
+            git commit -m "🤖 CodeRabbit review trigger" || exit 0
+            git push || exit 0
+          fi

@@ -13,11 +13,18 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [isDark, setIsDark] = useState(false); // Default to light theme
 
   useEffect(() => {
-    // Check localStorage for saved theme preference
+    // Force light theme as default for OKOA design system
+    // Only switch to dark if explicitly saved as dark
     const savedTheme = localStorage.getItem('okoa-theme');
+    
     if (savedTheme === 'dark') {
       setIsDark(true);
       document.documentElement.classList.add('dark');
+    } else {
+      // Ensure light theme is active (remove any dark class)
+      setIsDark(false);
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('okoa-theme', 'light');
     }
   }, []);
 
